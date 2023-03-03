@@ -18,8 +18,12 @@ Resumo...
 
 - ...
 
-## Ferramentas Usadas 
-...
+## Ferramentas Usadas
+
+- Yarn
+
+Leia o [Guia de Instalação](https://yarnpkg.com/en/docs/install) no site oficial Yarn para mais detalhes de como instalar o Yarn.
+
 
 ## Integrantes
 Projeto desenvolvido pelos Devs:
@@ -27,10 +31,7 @@ Projeto desenvolvido pelos Devs:
 - [Cauli Vilela Ferreira](https://github.com/coquizin)
 - 
 
-- Navegar até a pasta de destino
-```sh
-cd utils
-```
+
 
 - Instalar dependências
 ```sh
