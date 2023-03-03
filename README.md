@@ -4,7 +4,7 @@
 - Instituição: Universidade Federal do ABC
 - Curso: Bacharelado em Ciência da Computação
 - Disciplina: Engenharia de Software
-- Alunos: Cauli Vilela Ferreira, ...
+- Alunos: Cauli Vilela Ferreira, Enzo Shiraishi Nunes da Silva, Anderson de Freitas da Costa, Miguel Piva de Santana.
 
 Resumo...
 
