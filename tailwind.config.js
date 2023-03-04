@@ -2,7 +2,15 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        "content-wrapper-max": "1200px",
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    function ({ addVariant }) {
+      addVariant("fm", ".fm &");
+    },
+  ],
 };
