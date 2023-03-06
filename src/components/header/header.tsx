@@ -1,5 +1,6 @@
 import useScroll from "@/hooks/useOnScrolls";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   const isScrolled = useScroll(0);
@@ -17,39 +18,21 @@ export default function Header() {
           <div className="flex justify-center text-3xl font-medium text-yellow-500">
             iPets
           </div>
-          <nav className="justify-center hidden  md:flex">
+          <nav className="justify-center hidden md:flex">
             <ul className="flex space-x-4">
               <li>
-                <a
-                  href="#"
-                  className="text-xl text-white duration-200 hover:text-gray-300"
-                >
-                  Início
-                </a>
+                <Link href={"/"} passHref>
+                  <a className="text-xl text-white duration-200 hover:text-gray-300">
+                    Início
+                  </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="text-xl text-white duration-200 hover:text-gray-300"
-                >
-                  Sobre
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-xl text-white duration-200 hover:text-gray-300"
-                >
-                  Serviços
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-xl text-white duration-200 hover:text-gray-300"
-                >
-                  Contato
-                </a>
+                <Link href={"/login"} passHref>
+                  <a className="text-xl text-white duration-200 hover:text-gray-300">
+                    Login
+                  </a>
+                </Link>
               </li>
             </ul>
           </nav>
