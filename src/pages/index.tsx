@@ -10,7 +10,6 @@ export default function Home() {
     <>
       <Head>
         <title>iPets</title>
-        <meta name="theme-color" content="rgb(255, 255, 255)" />
       </Head>
       <Header />
       <div className="bg-white">
