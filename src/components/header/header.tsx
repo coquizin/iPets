@@ -14,11 +14,11 @@ export default function Header() {
       />
       <div className="relative z-50 flex items-center justify-center  w-full h-16 px-2 text-sm md:px-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:bg-[#ffffff]/[.08] after:h-[1px]">
         <div className="grid items-center justify-between grid-cols-3 w-content-wrapper-max">
-          <div>Logo</div>
+          <div className="hidden md:block">Logo</div>
           <div className="flex justify-center text-3xl font-medium text-yellow-500">
             iPets
           </div>
-          <nav className="justify-center hidden md:flex">
+          <nav className="flex justify-center">
             <ul className="flex space-x-4">
               <li>
                 <Link href={"/"} passHref>

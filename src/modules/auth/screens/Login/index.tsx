@@ -6,13 +6,13 @@ export default function LoginScreen() {
       <div className="bg-[url('/assets/images/loginPic.jpg')] h-screen bg-no-repeat bg-cover bg-[center] xl:max-w-[60%] md:max-w-[50%] hidden md:block w-full" />
       <div className="w-full xl:max-w-[40%] md:max-w-[50%] bg-white px-5 flex flex-col justify-center items-center">
         <div className="flex flex-col items-center w-full gap-1">
-          <h1 className="md:text-4xl text-3xl font-semibold text-[#EDC065]">
+          <h1 className="md:text-4xl text-3xl font-semibold font-Jost text-[#EDC065]">
             Bem vindo ao iPets.
           </h1>
           <p className="text-sm md:text-base">
             não possui uma conta?{" "}
             <Link href={"/criar-conta"}>
-              <a className="text-[#E9B13F] font-medium">clique aqui.</a>
+              <a className="text-[#E9B13F] font-medium">crie aqui.</a>
             </Link>
           </p>
         </div>
@@ -69,7 +69,7 @@ export default function LoginScreen() {
               >
                 Entrar
               </button>
-              <button className="md:max-w-[400px] max-w-[300px] w-full relative flex items-center justify-center h-[62px] border-2 border-solid border-[#C1CCD6] rounded-md  text-black/[54%] text-lg font-semibold">
+              <button className="md:max-w-[400px] max-w-[300px] w-full relative flex items-center justify-center h-[62px] border-2 border-solid border-[#C1CCD6] rounded-md text-black/[54%] text-lg font-semibold">
                 <div className="absolute left-5">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
