@@ -14,7 +14,7 @@ export default function Document() {
         <meta name="site_name" property="og:site_name" content="iPets" />
         <meta name="author" content="iPets" />
         <meta name="locale" property="og:locale" content="pt-br" />
-        <link rel="shortcut icon" href="/assets/images/Logo_IPets.svg" />
+        <link rel="shortcut icon" href="/assets/images/LogoPets.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
