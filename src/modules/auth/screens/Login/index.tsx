@@ -22,7 +22,7 @@ export default function LoginScreen() {
         <div className="mb-12 md:mb-20">
           <Image
             alt="logo iPets"
-            src="/assets/images/logo_IPets.svg"
+            src="/assets/images/LogoPets.svg"
             width={80}
             height={80}
           />
