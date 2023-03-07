@@ -5,7 +5,6 @@ export default function Document() {
     <Html>
       <Head>
         <meta charSet="utf-8" />
-        <link rel="shortcut icon" href={`/favicon.ico`} />
         <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
         <meta name="apple-mobile-web-app-title" content="iPets" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
@@ -15,6 +14,7 @@ export default function Document() {
         <meta name="site_name" property="og:site_name" content="iPets" />
         <meta name="author" content="iPets" />
         <meta name="locale" property="og:locale" content="pt-br" />
+        <link rel="shortcut icon" href="/assets/images/Logo_IPets.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
