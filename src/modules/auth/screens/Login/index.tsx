@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function LoginScreen() {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen text-black">
       <div className="bg-[url('/assets/images/loginPic.jpg')] h-screen bg-no-repeat bg-cover bg-[center] xl:max-w-[60%] md:max-w-[50%] hidden md:block w-full" />
       <div className="w-full xl:max-w-[40%] md:max-w-[50%] bg-white px-5 flex flex-col justify-center items-center">
         <div className="flex flex-col items-center w-full gap-1">

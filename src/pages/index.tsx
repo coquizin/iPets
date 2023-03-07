@@ -12,7 +12,7 @@ export default function Home() {
         <title>iPets</title>
       </Head>
       <Header />
-      <div className="">
+      <div className="bg-white">
         <HomeScreen />
       </div>
       <Footer />
