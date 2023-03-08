@@ -1,3 +1,4 @@
+import Checkbox from "@/components/checkbox";
 import Input from "@/components/input/input";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,8 +9,12 @@ export default function LoginScreen() {
   const {
     register,
     handleSubmit,
+    getValues,
+    setValue,
     formState: { errors },
-  } = useForm<LoginProps>({ defaultValues: { email: "", password: "" } });
+  } = useForm<LoginProps>({
+    defaultValues: { email: "", password: "", rememberMe: true },
+  });
 
   const onSubmit = (data: LoginProps) => {
     console.log(data);
@@ -28,13 +33,13 @@ export default function LoginScreen() {
           />
         </div>
         <div className="flex flex-col items-center w-full gap-1">
-          <h1 className="md:text-4xl text-3xl font-semibold font-Jost text-[#EDC065]">
+          <h1 className="text-3xl font-semibold md:text-4xl font-Jost text-primary">
             Bem vindo ao iPets.
           </h1>
           <p className="text-sm md:text-base">
             não possui uma conta?{" "}
             <Link href={"/criar-conta"}>
-              <a className="text-[#E9B13F] font-medium">crie aqui.</a>
+              <a className="font-medium text-primary">crie aqui.</a>
             </Link>
           </p>
         </div>
@@ -55,7 +60,7 @@ export default function LoginScreen() {
             </div>
 
             <div className="max-w-[500px] w-full">
-              <div className="flex flex-col gap-1 mb-2 max-w-[500px] min-w-[300px] w-full">
+              <div className="flex flex-col !font-sans gap-1 mb-2 max-w-[500px] min-w-[300px] w-full">
                 <Input
                   label="Senha"
                   name="password"
@@ -71,20 +76,15 @@ export default function LoginScreen() {
               </div>
 
               <div className="flex justify-between mb-10 gap-1 max-w-[500px] min-w-[300px] w-full">
-                <div>
-                  <label
-                    className="space-x-2 cursor-pointer"
-                    htmlFor="remember"
-                  >
-                    <input
-                      type="checkbox"
-                      name="remember"
-                      id="remember"
-                      className=""
-                    />
-                    <span>lembrar dispositivo</span>
-                  </label>
-                </div>
+                <Checkbox
+                  name="rememberMe"
+                  id="rememberMe"
+                  checked={getValues("rememberMe")}
+                  register={register}
+                  getValues={getValues("rememberMe")}
+                >
+                  lembrar senha
+                </Checkbox>
                 <Link href={"/esqueci-a-senha"} passHref>
                   <a className="text-[#E9B13F] hover:underline duration-150 font-medium">
                     esqueci a senha
