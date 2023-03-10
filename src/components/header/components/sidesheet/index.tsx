@@ -11,7 +11,7 @@ const SideSheet = ({
   overlay,
   isOpen,
 }: SideSheetProps) => {
-  const [animationOff, setAnimationOff] = useState<boolean>(true);
+  const [animationOff, setAnimationOff] = useState<boolean>(false);
 
   useEffect(() => {
     if (isOpen) {
