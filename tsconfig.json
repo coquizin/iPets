@@ -17,7 +17,9 @@
     "incremental": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@images/*": ["./public/assets/images/*"]
+      "@images/*": ["/assets/images/*"],
+      "@global-layouts/*": ["./layouts/*"],
+      "@pages/*": ["./pages/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

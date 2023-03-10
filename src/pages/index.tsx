@@ -1,9 +1,18 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "@/styles/Home.module.css";
+import styled from "styled-components";
 import HomeScreen from "@/modules/home/screens/home";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
+import { NAVBAR_HEIGHT_FULL, NAVBAR_HEIGHT } from "@/layouts/constants";
+
+const Cointainer = styled.div`
+  background-color: white;
+  margin-top: ${NAVBAR_HEIGHT};
+
+  @media (min-width: 768px) {
+    margin-top: ${NAVBAR_HEIGHT_FULL};
+  } ;
+`;
 
 export default function Home() {
   return (
@@ -12,9 +21,9 @@ export default function Home() {
         <title>iPets</title>
       </Head>
       <Header />
-      <div className="bg-white">
+      <Cointainer>
         <HomeScreen />
-      </div>
+      </Cointainer>
       <Footer />
     </>
   );

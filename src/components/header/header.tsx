@@ -6,36 +6,68 @@ export default function Header() {
   const isScrolled = useScroll(0);
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-[1000] fm:absolute">
+    <header className="fixed px-4 top-0 right-0 left-0 z-[1000] fm:absolute">
       <div
         className={`
-          fixed inset-0 h-16  border-divider-light backdrop-blur dark:border-divider-dark dark:bg-slate-900/80 fm:hidden
+          fixed inset-0 h-16 md:h-24 bg-white  border-divider-light backdrop-blur dark:border-divider-dark dark:bg-slate-900/80 fm:hidden
         )`}
       />
-      <div className="relative z-50 flex items-center justify-center  w-full h-16 px-2 text-sm md:px-4 after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:bg-[#ffffff]/[.08] after:h-[1px]">
+      <div className="relative z-50 flex items-center justify-center w-full h-16 px-2 text-sm md:h-24 md:px-4">
         <div className="grid items-center justify-between grid-cols-3 w-content-wrapper-max">
-          <div className="hidden md:block">Logo</div>
-          <div className="flex justify-center text-3xl font-medium text-yellow-500">
-            iPets
-          </div>
-          <nav className="flex justify-center">
+          <div className="block md:hidden">...</div>
+
+          <Link href={"/"} passHref>
+            <div className="flex gap-2 cursor-pointer max-w-fit">
+              <Image
+                alt="logo iPets"
+                src="/assets/images/LogoPets.svg"
+                width={32}
+                className="min-w-max"
+                height={32}
+              />
+              <div className="flex justify-center text-3xl font-medium text-yellow-500">
+                iPets
+              </div>
+            </div>
+          </Link>
+
+          <nav className="justify-center hidden text-secundary md:flex">
             <ul className="flex space-x-4">
               <li>
                 <Link href={"/"} passHref>
-                  <a className="text-xl text-white duration-200 hover:text-gray-300">
-                    Início
-                  </a>
+                  <a className="text-[1.1rem] duration-200 ">Home</a>
                 </Link>
               </li>
               <li>
-                <Link href={"/login"} passHref>
-                  <a className="text-xl text-white duration-200 hover:text-gray-300">
-                    Login
-                  </a>
+                <Link href={"/"} passHref>
+                  <a className="text-[1.1rem] duration-200 ">Explore</a>
+                </Link>
+              </li>
+              <li>
+                <Link href={"/"} passHref>
+                  <a className="text-[1.1rem] duration-200 ">Cuidadores</a>
+                </Link>
+              </li>
+              <li>
+                <Link href={"/"} passHref>
+                  <a className="text-[1.1rem] duration-200 ">Parceiros</a>
                 </Link>
               </li>
             </ul>
           </nav>
+
+          <div className="flex gap-4 justify-self-end">
+            <Link href={"/criar-conta"} passHref>
+              <a className="md:flex hidden items-center justify-center w-[100px] h-[35px] text-[1.1rem] text-yellow-500">
+                criar conta
+              </a>
+            </Link>
+            <Link href={"/login"} passHref>
+              <a className="flex items-center justify-center w-[100px] h-[35px] text-[1.1rem] text-white duration-200 rounded-md bg-yellow-500 hover:bg-yellow-500/75">
+                entrar
+              </a>
+            </Link>
+          </div>
         </div>
       </div>
     </header>

@@ -9,7 +9,7 @@ export default function Checkbox(props: CheckboxProps) {
 
   return (
     <label
-      className="group relative leading-5 text-[#474F60] font-medium"
+      className="group cursor-pointer relative leading-5 text-[#474F60] font-medium"
       htmlFor={name}
     >
       <div className="ml-6">{children}</div>

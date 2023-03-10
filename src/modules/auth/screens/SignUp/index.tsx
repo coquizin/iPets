@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { SignInProps } from "./types";
 
-export default function SignInScreen() {
+export default function SignUpScreen() {
   const {
     register,
     handleSubmit,
@@ -23,13 +23,15 @@ export default function SignInScreen() {
     <div className="flex text-black">
       <div className="bg-[url('/assets/images/signInPic.jpg')] bg-no-repeat bg-cover bg-[center] xl:max-w-[60%] md:max-w-[50%] hidden md:block w-full" />
       <div className="w-full xl:max-w-[40%] md:max-w-[50%] bg-white px-5 py-20 flex flex-col justify-center items-center">
-        <div className="mb-5">
-          <Image
-            alt="logo iPets"
-            src="/assets/images/LogoPets.svg"
-            width={80}
-            height={80}
-          />
+        <div className="mb-5 cursor-pointer">
+          <Link href={"/"} passHref>
+            <Image
+              alt="logo iPets"
+              src="/assets/images/LogoPets.svg"
+              width={80}
+              height={80}
+            />
+          </Link>
         </div>
         <div className="flex flex-col items-center w-full gap-1">
           <h1 className="text-3xl font-semibold md:text-4xl font-Jost text-primary">

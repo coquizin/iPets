@@ -1,15 +1,15 @@
-import SignInScreen from "@/modules/auth/screens/SignIn";
+import SignUpScreen from "@/modules/auth/screens/SignUp";
 import Head from "next/head";
 
-const SignIn = () => {
+const SignUp = () => {
   return (
     <>
       <Head>
         <title>Criar Conta | iPets</title>
       </Head>
-      <SignInScreen />
+      <SignUpScreen />
     </>
   );
 };
 
-export default SignIn;
+export default SignUp;
