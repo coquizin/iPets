@@ -21,7 +21,7 @@ const SideSheet = ({
 
   const close = () => {
     setAnimationOff(true);
-    setTimeout(() => onClose(), 300);
+    setTimeout(() => onClose(), 295);
   };
 
   return (
@@ -33,9 +33,9 @@ const SideSheet = ({
       <StyledContent disappear={animationOff}>
         <div className="flex items-center justify-between">
           <MenuToggle onClick={close}>
-            <MenuToggleSpan checked={isOpen}></MenuToggleSpan>
-            <MenuToggleSpan checked={isOpen}></MenuToggleSpan>
-            <MenuToggleSpan checked={isOpen}></MenuToggleSpan>
+            <MenuToggleSpan checked={true}></MenuToggleSpan>
+            <MenuToggleSpan checked={true}></MenuToggleSpan>
+            <MenuToggleSpan checked={true}></MenuToggleSpan>
           </MenuToggle>
           <StyledTitle>{title ?? ``}</StyledTitle>
           {/* <IconButton onClick={close}>X</IconButton> */}
