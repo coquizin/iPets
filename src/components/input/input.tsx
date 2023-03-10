@@ -14,9 +14,11 @@ export default function Input(props: InputProps) {
         id={id}
         placeholder={placeholder}
         {...props.register}
-        className=" w-full max-h-[62px] rounded-md text-base p-5 border-[2px] border-solid border-[#C1CCD6] focus-visible:outline-none"
+        className={`${
+          Boolean(errors) ? "border-red-600" : " border-[#C1CCD6]"
+        } w-full max-h-[62px] rounded-md text-base duration-300 p-5 border-[2px] border-solid focus-visible:outline-none `}
       />
-      <div className="self-start text-sm text-red-500">
+      <div className="self-start text-sm text-red-600">
         {Boolean(errors) && errors?.message}
       </div>
     </>

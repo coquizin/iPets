@@ -1,4 +1,4 @@
-import Checkbox from "@/components/checkbox";
+import { formatToCPF, formatToPhone } from "brazilian-values";
 import Input from "@/components/input/input";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +9,6 @@ export default function SignInScreen() {
   const {
     register,
     handleSubmit,
-    getValues,
     setValue,
     formState: { errors },
   } = useForm<SignInProps>({
@@ -21,9 +20,9 @@ export default function SignInScreen() {
   };
 
   return (
-    <div className="flex h-screen text-black">
-      <div className="bg-[url('/assets/images/createPic.jpg')] h-screen bg-no-repeat bg-cover bg-[center] xl:max-w-[60%] md:max-w-[50%] hidden md:block w-full" />
-      <div className="w-full xl:max-w-[40%] md:max-w-[50%] bg-white px-5 flex flex-col justify-center items-center">
+    <div className="flex text-black">
+      <div className="bg-[url('/assets/images/signInPic.jpg')] bg-no-repeat bg-cover bg-[center] xl:max-w-[60%] md:max-w-[50%] hidden md:block w-full" />
+      <div className="w-full xl:max-w-[40%] md:max-w-[50%] bg-white px-5 py-20 flex flex-col justify-center items-center">
         <div className="mb-5">
           <Image
             alt="logo iPets"
@@ -61,6 +60,28 @@ export default function SignInScreen() {
 
             <div className="flex flex-col gap-1 max-w-[500px] min-w-[300px] w-full">
               <Input
+                label="CPF"
+                name="cpf"
+                type="text"
+                id="cpf"
+                errors={errors.cpf}
+                register={{
+                  ...register("cpf", {
+                    required: "CPF é obrigatório",
+                    minLength: {
+                      value: 14,
+                      message: "CPF deve ter 11 dígitos",
+                    },
+                    onChange: (e) => {
+                      setValue("cpf", formatToCPF(e.target.value));
+                    },
+                  }),
+                }}
+              />
+            </div>
+
+            <div className="flex flex-col gap-1 max-w-[500px] min-w-[300px] w-full">
+              <Input
                 label="Email"
                 name="email"
                 type="email"
@@ -80,7 +101,16 @@ export default function SignInScreen() {
                 id="phone"
                 errors={errors.phone}
                 register={{
-                  ...register("phone", { required: "Telefone é obrigatório" }),
+                  ...register("phone", {
+                    required: "Telefone é obrigatório",
+                    minLength: {
+                      value: 14,
+                      message: "Telefone deve ter 11 dígitos",
+                    },
+                    onChange: (e) => {
+                      setValue("phone", formatToPhone(e.target.value));
+                    },
+                  }),
                 }}
               />
             </div>

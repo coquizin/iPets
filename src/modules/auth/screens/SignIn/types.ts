@@ -3,4 +3,5 @@ export type SignInProps = {
   password: string;
   name: string;
   phone: string;
+  cpf: string;
 };
