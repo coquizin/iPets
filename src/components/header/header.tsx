@@ -1,9 +1,13 @@
 import useScroll from "@/hooks/useOnScrolls";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { MenuToggle, MenuToggleInput, MenuToggleSpan } from "./styles";
 
 export default function Header() {
   const isScrolled = useScroll(0);
+
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <header className="fixed px-4 top-0 right-0 left-0 z-[1000] fm:absolute">
@@ -14,10 +18,17 @@ export default function Header() {
       />
       <div className="relative z-50 flex items-center justify-center w-full h-16 px-2 text-sm md:h-24 md:px-4">
         <div className="grid items-center justify-between grid-cols-3 w-content-wrapper-max">
-          <div className="block md:hidden">...</div>
+          <div className="block md:hidden">
+            <MenuToggle onClick={() => setShowMenu(!showMenu)}>
+              <MenuToggleInput />
+              <MenuToggleSpan checked={showMenu}></MenuToggleSpan>
+              <MenuToggleSpan checked={showMenu}></MenuToggleSpan>
+              <MenuToggleSpan checked={showMenu}></MenuToggleSpan>
+            </MenuToggle>
+          </div>
 
           <Link href={"/"} passHref>
-            <div className="flex gap-2 cursor-pointer max-w-fit">
+            <div className="flex gap-2 -ml-5 cursor-pointer md:ml-0 justify-self-center md:justify-self-start md:max-w-fit">
               <Image
                 alt="logo iPets"
                 src="/assets/images/LogoPets.svg"
