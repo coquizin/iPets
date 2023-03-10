@@ -9,33 +9,6 @@ export const MenuToggle = styled.div`
   user-select: none;
 `;
 
-export const MenuToggleA = styled.a`
-  text-decoration: none;
-  color: #232323;
-
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: tomato;
-  }
-`;
-
-export const MenuToggleInput = styled.input`
-  display: block;
-  width: 40px;
-  height: 32px;
-  position: absolute;
-  top: -7px;
-  left: -5px;
-
-  cursor: pointer;
-
-  opacity: 0; /* hide this */
-  z-index: 1002; /* and place it over the hamburger */
-
-  -webkit-touch-callout: none;
-`;
-
 export const MenuToggleSpan = styled.span`
   display: block;
   width: 33px;
