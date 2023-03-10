@@ -30,6 +30,7 @@ export const StyledOverlay = styled.div`
     props.disappear ? overlayDisappear : overlayShow};
   animation-duration: 300ms;
   animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
 `;
 
 export const StyledContent = styled.div`
@@ -52,6 +53,7 @@ export const StyledContent = styled.div`
     props.disappear ? contentDisappear : contentShow};
   animation-duration: 300ms;
   animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
 `;
 
 export const StyledTitle = styled.h2`
