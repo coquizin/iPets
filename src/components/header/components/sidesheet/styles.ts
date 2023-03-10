@@ -44,6 +44,7 @@ export const StyledContent = styled.div`
   max-width: 100vw;
   width: 360px;
   height: 100%;
+  translate: translateX(-100%);
 
   &:focus {
     outline: none;
