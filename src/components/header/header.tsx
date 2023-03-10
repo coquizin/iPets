@@ -2,7 +2,7 @@ import useScroll from "@/hooks/useOnScrolls";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { MenuToggle, MenuToggleInput, MenuToggleSpan } from "./styles";
+import { MenuToggle, MenuToggleSpan } from "./styles";
 
 export default function Header() {
   const isScrolled = useScroll(0);
@@ -20,7 +20,6 @@ export default function Header() {
         <div className="grid items-center justify-between grid-cols-3 w-content-wrapper-max">
           <div className="block md:hidden">
             <MenuToggle onClick={() => setShowMenu(!showMenu)}>
-              <MenuToggleInput />
               <MenuToggleSpan checked={showMenu}></MenuToggleSpan>
               <MenuToggleSpan checked={showMenu}></MenuToggleSpan>
               <MenuToggleSpan checked={showMenu}></MenuToggleSpan>
