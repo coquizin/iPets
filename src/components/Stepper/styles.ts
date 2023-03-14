@@ -35,8 +35,8 @@ export const Container = styled.div`
   position: relative;
 
   svg#checkbox {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     stroke: #23c274;
     stroke-width: 6;
 
@@ -87,10 +87,14 @@ export const CheckBox = styled.div`
 
 export const CheckBoxInfo = styled.div`
   position: absolute;
-  bottom: -60px;
+  bottom: -50px;
   display: grid;
-  margin: 0 -30px;
+  margin: 0 -20px;
   grid-template-columns: max-content;
+
+  @media (min-width: 768px) {
+    margin: 0 -35px;
+  }
 
   span.progress-info {
     text-transform: capitalize;
@@ -127,13 +131,21 @@ export const CheckBoxInfo = styled.div`
 `;
 
 export const ProgressLine = styled.div`
-  width: 140px;
+  width: 60px;
   margin: 0 10px;
   height: 4px;
   overflow: hidden;
   display: inline-block;
   background: #d2d2d2;
   border-radius: 10px;
+
+  @media (min-width: 450px) {
+    width: 66px;
+  }
+
+  @media (min-width: 768px) {
+    width: 140px;
+  }
 
   &.active {
     .progress-percent {

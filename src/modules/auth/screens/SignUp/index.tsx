@@ -4,25 +4,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { SignInProps } from "./types";
+import { useRouter } from "next/router";
 
 export default function SignUpScreen() {
+  const route = useRouter();
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<SignInProps>({
-    defaultValues: { email: "", password: "", name: "", phone: "" },
+    defaultValues: { email: "", password: "" },
   });
 
   const onSubmit = (data: SignInProps) => {
+    route.push("criar-conta/cliente");
     console.log(data);
   };
 
   return (
     <div className="flex text-black">
       <div className="bg-[url('/assets/images/signInPic.jpg')] bg-no-repeat bg-cover bg-[center] xl:max-w-[60%] md:max-w-[50%] hidden md:block w-full" />
-      <div className="w-full xl:max-w-[40%] md:max-w-[50%] bg-white px-5 py-20 flex flex-col justify-center items-center">
+      <div className="w-full xl:max-w-[40%] md:max-w-[50%] min-h-screen bg-white px-5 py-20 flex flex-col justify-center items-center">
         <div className="mb-5 cursor-pointer">
           <Link href={"/"} passHref>
             <Image
@@ -49,41 +51,6 @@ export default function SignUpScreen() {
           <div className="flex flex-col items-center w-full mt-8 space-y-4">
             <div className="flex flex-col gap-1 max-w-[500px] min-w-[300px] w-full">
               <Input
-                label="Nome"
-                name="name"
-                type="text"
-                id="name"
-                errors={errors.name}
-                register={{
-                  ...register("name", { required: "Nome é obrigatório" }),
-                }}
-              />
-            </div>
-
-            <div className="flex flex-col gap-1 max-w-[500px] min-w-[300px] w-full">
-              <Input
-                label="CPF"
-                name="cpf"
-                type="text"
-                id="cpf"
-                errors={errors.cpf}
-                register={{
-                  ...register("cpf", {
-                    required: "CPF é obrigatório",
-                    minLength: {
-                      value: 14,
-                      message: "CPF deve ter 11 dígitos",
-                    },
-                    onChange: (e) => {
-                      setValue("cpf", formatToCPF(e.target.value));
-                    },
-                  }),
-                }}
-              />
-            </div>
-
-            <div className="flex flex-col gap-1 max-w-[500px] min-w-[300px] w-full">
-              <Input
                 label="Email"
                 name="email"
                 type="email"
@@ -91,28 +58,6 @@ export default function SignUpScreen() {
                 errors={errors.email}
                 register={{
                   ...register("email", { required: "Email é obrigatório" }),
-                }}
-              />
-            </div>
-
-            <div className="flex flex-col gap-1 max-w-[500px] min-w-[300px] w-full">
-              <Input
-                label="Telefone"
-                name="phone"
-                type="text"
-                id="phone"
-                errors={errors.phone}
-                register={{
-                  ...register("phone", {
-                    required: "Telefone é obrigatório",
-                    minLength: {
-                      value: 14,
-                      message: "Telefone deve ter 11 dígitos",
-                    },
-                    onChange: (e) => {
-                      setValue("phone", formatToPhone(e.target.value));
-                    },
-                  }),
                 }}
               />
             </div>

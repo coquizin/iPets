@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { Cliente } from "./types";
 import Stepper from "@/components/Stepper";
-import { useState } from "react";
 import { useCreateAccountScreen } from "@/pages/stores/useCreateAccount";
 
 export default function SignUpClienteScreen() {
@@ -24,6 +23,7 @@ export default function SignUpClienteScreen() {
   );
 
   const onSubmit = (data: Cliente) => {
+    setCheckoutOrderId((orderId || 0) + 1);
     console.log(data);
   };
 

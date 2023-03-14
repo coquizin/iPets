@@ -38,7 +38,10 @@ export default function Stepper({ children, options }: any) {
                 </ProgressLine>
               )}
               <CheckBoxInfo>
-                {index + 1}. {option}
+                <div className="max-w-[120px] text-center font-medium text-xs md:text-sm h-8 justify-start">
+                  <span className="hidden md:inline-block">{index + 1}.</span>{" "}
+                  {option}
+                </div>
               </CheckBoxInfo>
             </CheckBox>
           );
