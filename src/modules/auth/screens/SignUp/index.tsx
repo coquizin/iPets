@@ -1,4 +1,3 @@
-import { formatToCPF, formatToPhone } from "brazilian-values";
 import Input from "@/components/input/input";
 import Image from "next/image";
 import Link from "next/link";
