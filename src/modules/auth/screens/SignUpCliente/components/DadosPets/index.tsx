@@ -2,9 +2,12 @@ import Input from "@/components/input/input";
 import { Pets } from "@/entities/pets";
 import { useCreateAccountScreen } from "@/stores/useCreateAccount";
 import { formatToCEP } from "brazilian-values";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
 export default function DadosPets() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -148,8 +151,7 @@ export default function DadosPets() {
           type="button"
           className=" max-w-[115px] w-full flex items-center justify-center h-[40px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-medium "
           onClick={() => {
-            setCheckoutOrderId((orderId || 0) + 1);
-            window.scrollTo(0, 0);
+            router.push("/");
           }}
         >
           Confirmar
