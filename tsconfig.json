@@ -18,8 +18,10 @@
     "paths": {
       "@/*": ["./src/*"],
       "@images/*": ["/assets/images/*"],
-      "@global-layouts/*": ["./layouts/*"],
-      "@pages/*": ["./pages/*"]
+      "@global-layouts/*": ["/src/layouts/*"],
+      "@pages/*": ["/src/pages/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

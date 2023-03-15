@@ -1,4 +1,6 @@
-export interface Address {
+import { Meta } from "@entities/Meta";
+
+export interface Address extends Meta {
   street: string;
   city: string;
   state: string;

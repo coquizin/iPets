@@ -1,4 +1,6 @@
-export interface Pets {
+import { Meta } from "@entities/Meta";
+
+export interface Pets extends Meta {
   id: number;
   name: string;
   type: string;
