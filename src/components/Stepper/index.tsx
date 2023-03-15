@@ -1,4 +1,4 @@
-import { useCreateAccountScreen } from "@/pages/stores/useCreateAccount";
+import { useCreateAccountScreen } from "@/stores/useCreateAccount";
 import {
   CheckBox,
   CheckBoxInfo,

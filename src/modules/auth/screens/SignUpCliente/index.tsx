@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { Cliente } from "./types";
 import Stepper from "@/components/Stepper";
-import { useCreateAccountScreen } from "@/pages/stores/useCreateAccount";
+import { useCreateAccountScreen } from "@/stores/useCreateAccount";
 
 export default function SignUpClienteScreen() {
   const {
