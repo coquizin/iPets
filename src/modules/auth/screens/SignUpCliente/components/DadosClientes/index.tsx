@@ -1,5 +1,6 @@
 import Input from "@/components/input/input";
 import { useCreateAccountScreen } from "@/stores/useCreateAccount";
+import { formatToCpf, formatToDate, formatToOnlyLetters } from "@/utils/Masks";
 import { formatToCPF, formatToGenericPhone } from "brazilian-values";
 import { useForm } from "react-hook-form";
 import { Cliente } from "../../types";
@@ -9,6 +10,7 @@ export default function DadosClientes() {
     register,
     handleSubmit,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm<Cliente>({
     defaultValues: { email: "", password: "", name: "", phone: "" },
@@ -35,6 +37,7 @@ export default function DadosClientes() {
               name="cpf"
               type="text"
               id="cpf"
+              placeholder="000.000.000-00"
               errors={errors.cpf}
               register={{
                 ...register("cpf", {
@@ -44,7 +47,7 @@ export default function DadosClientes() {
                     message: "CPF deve ter 11 dígitos",
                   },
                   onChange: (e) => {
-                    setValue("cpf", formatToCPF(e.target.value));
+                    setValue("cpf", formatToCpf(e.target.value));
                   },
                 }),
               }}
@@ -59,7 +62,12 @@ export default function DadosClientes() {
               id="name"
               errors={errors.name}
               register={{
-                ...register("name", { required: "Nome é obrigatório" }),
+                ...register("name", {
+                  required: "Nome é obrigatório",
+                  onChange: (e) => {
+                    setValue("name", formatToOnlyLetters(e.target.value));
+                  },
+                }),
               }}
             />
           </div>
@@ -75,6 +83,13 @@ export default function DadosClientes() {
               register={{
                 ...register("birthDate", {
                   required: "Data de nascimento é obrigatório",
+                  minLength: {
+                    value: 10,
+                    message: "",
+                  },
+                  onChange: (e) => {
+                    setValue("birthDate", formatToDate(e.target.value));
+                  },
                 }),
               }}
             />
@@ -87,7 +102,7 @@ export default function DadosClientes() {
               type="text"
               id="phone"
               errors={errors.phone}
-              placeholder="(00) 0 0000-0000"
+              placeholder="(00) 00000-0000"
               register={{
                 ...register("phone", {
                   required: "Telefone é obrigatório",

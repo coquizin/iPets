@@ -1,7 +1,7 @@
 import Input from "@/components/input/input";
-import { Pets } from "@/entities/pets";
+import { Pets } from "@/entities/Pets/pets";
 import { useCreateAccountScreen } from "@/stores/useCreateAccount";
-import { formatToCEP } from "brazilian-values";
+import { formatToNumber, formatToOnlyLetters } from "@/utils/Masks";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
@@ -25,24 +25,6 @@ export default function DadosPets() {
   const onSubmit = (data: Pets) => {
     setCheckoutOrderId((orderId || 0) + 1);
     console.log(data);
-  };
-
-  const formatToNumber = (value: string) => {
-    if (!value) {
-      return "";
-    }
-
-    const onlyNums = value.replace(/[^\d]/g, "");
-    return onlyNums;
-  };
-
-  const formatToOnlyLetters = (value: string) => {
-    if (!value) {
-      return "";
-    }
-
-    const onlyLetters = value.replace(/[^a-zA-Z ]/g, "");
-    return onlyLetters;
   };
 
   return (
@@ -79,7 +61,7 @@ export default function DadosPets() {
                 ...register("type", {
                   required: "Espécie é obrigatório",
                   onChange: (e) => {
-                    setValue("type", formatToCEP(e.target.value));
+                    setValue("type", formatToOnlyLetters(e.target.value));
                   },
                 }),
               }}
@@ -104,22 +86,27 @@ export default function DadosPets() {
             />
           </div>
 
-          <div className="flex flex-col gap-1 max-w-[500px] w-full">
-            <Input
-              label="Idade"
-              name="number"
-              type="text"
-              id="number"
-              errors={errors.age}
-              register={{
-                ...register("age", {
-                  required: "Número é obrigatório",
-                  onChange: (e) => {
-                    setValue("age", formatToNumber(e.target.value));
-                  },
-                }),
-              }}
-            />
+          <div className="flex items-end gap-2">
+            <div className="flex flex-col gap-1 max-w-[150px] w-full">
+              <Input
+                label="Idade"
+                name="number"
+                type="text"
+                id="number"
+                errors={errors.age}
+                register={{
+                  ...register("age", {
+                    required: "Número é obrigatório",
+                    onChange: (e) => {
+                      setValue("age", formatToNumber(e.target.value));
+                    },
+                  }),
+                }}
+              />
+            </div>
+            <span className="mb-6 text-base font-medium text-secundary">
+              Anos
+            </span>
           </div>
 
           <div className="flex flex-col gap-1 max-w-[500px] w-full">

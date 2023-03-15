@@ -1,7 +1,11 @@
 import Input from "@/components/input/input";
-import { Address } from "@/entities/address";
+import { Address } from "@/entities/Address/address";
 import { useCreateAccountScreen } from "@/stores/useCreateAccount";
-import { formatToCEP } from "brazilian-values";
+import {
+  formatToCEP,
+  formatToNumber,
+  formatToOnlyLetters,
+} from "@/utils/Masks";
 import { useForm } from "react-hook-form";
 
 export default function DadosEndereco() {
@@ -22,24 +26,6 @@ export default function DadosEndereco() {
   const onSubmit = (data: Address) => {
     setCheckoutOrderId((orderId || 0) + 1);
     console.log(data);
-  };
-
-  const formatToNumber = (value: string) => {
-    if (!value) {
-      return "";
-    }
-
-    const onlyNums = value.replace(/[^\d]/g, "");
-    return onlyNums;
-  };
-
-  const formatToOnlyLetters = (value: string) => {
-    if (!value) {
-      return "";
-    }
-
-    const onlyLetters = value.replace(/[^a-zA-Z ]/g, "");
-    return onlyLetters;
   };
 
   return (
