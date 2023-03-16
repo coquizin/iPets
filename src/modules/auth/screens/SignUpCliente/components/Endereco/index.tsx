@@ -36,15 +36,11 @@ export default function DadosEndereco() {
       setValue("district", data?.bairro);
       setValue("city", data?.cidade.nome);
       setValue("state", data?.estado.sigla);
+      console.log(data);
     },
     refetchOnMount: true,
     enabled: Boolean(formatToNumber(watch("zip")).length === 8),
   });
-
-  const onChangeCep = (e: any) => {
-    if (e.target.value.length === 9) {
-    }
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
