@@ -14,6 +14,7 @@ export default function DadosEndereco() {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<Address>({
     defaultValues: {},
@@ -29,9 +30,16 @@ export default function DadosEndereco() {
     console.log(data);
   };
 
-  const cep = useGetAddressByCep("12223330");
-
-  console.log(cep);
+  useGetAddressByCep(formatToNumber(watch("zip")), {
+    onSuccess: (data) => {
+      setValue("street", data?.logradouro);
+      setValue("district", data?.bairro);
+      setValue("city", data?.cidade.nome);
+      setValue("state", data?.estado.sigla);
+    },
+    refetchOnMount: true,
+    enabled: Boolean(formatToNumber(watch("zip")).length === 8),
+  });
 
   const onChangeCep = (e: any) => {
     if (e.target.value.length === 9) {
