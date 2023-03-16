@@ -15,7 +15,9 @@ export default function Header() {
       <header className="fixed px-4 top-0 right-0 left-0 z-[60] fm:absolute">
         <div
           className={`
-          fixed inset-0 h-16 md:h-24 bg-white fm:hidden
+          fixed inset-0 h-16 md:h-24 bg-white fm:hidden ${
+            isScrolled && " border-b border-[F4EFEA] shadow-sm"
+          }
         )`}
         />
         <div className="relative z-50 flex items-center justify-center w-full h-16 px-2 text-sm md:h-24 md:px-4">
