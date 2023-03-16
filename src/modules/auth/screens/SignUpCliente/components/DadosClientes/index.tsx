@@ -1,6 +1,10 @@
 import Input from "@/components/input/input";
 import { useCreateAccountScreen } from "@/stores/useCreateAccount";
-import { formatToCpf, formatToDate, formatToOnlyLetters } from "@/utils/Masks";
+import {
+  formatToCpf,
+  formatToDate,
+  formatToOnlyLetters,
+} from "@/utils/helpers/Masks";
 import { formatToCPF, formatToGenericPhone } from "brazilian-values";
 import { useForm } from "react-hook-form";
 import { Cliente } from "../../types";

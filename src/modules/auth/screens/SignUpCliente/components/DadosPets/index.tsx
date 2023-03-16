@@ -1,7 +1,7 @@
 import Input from "@/components/input/input";
 import { Pets } from "@/entities/Pets/pets";
 import { useCreateAccountScreen } from "@/stores/useCreateAccount";
-import { formatToNumber, formatToOnlyLetters } from "@/utils/Masks";
+import { formatToNumber, formatToOnlyLetters } from "@/utils/helpers/Masks";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 

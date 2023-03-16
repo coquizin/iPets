@@ -1,11 +1,12 @@
 import Input from "@/components/input/input";
 import { Address } from "@/entities/Address/address";
+import { useGetAddressByCep } from "@/services/address";
 import { useCreateAccountScreen } from "@/stores/useCreateAccount";
 import {
   formatToCEP,
   formatToNumber,
   formatToOnlyLetters,
-} from "@/utils/Masks";
+} from "@/utils/helpers/Masks";
 import { useForm } from "react-hook-form";
 
 export default function DadosEndereco() {
@@ -26,6 +27,15 @@ export default function DadosEndereco() {
   const onSubmit = (data: Address) => {
     setCheckoutOrderId((orderId || 0) + 1);
     console.log(data);
+  };
+
+  const cep = useGetAddressByCep("12223330");
+
+  console.log(cep);
+
+  const onChangeCep = (e: any) => {
+    if (e.target.value.length === 9) {
+    }
   };
 
   return (
