@@ -1,11 +1,12 @@
 import Input from "@/components/input/input";
 import { Address } from "@/entities/Address/address";
+import { useGetAddressByCep } from "@/services/address";
 import { useCreateAccountScreen } from "@/stores/useCreateAccount";
 import {
   formatToCEP,
   formatToNumber,
   formatToOnlyLetters,
-} from "@/utils/Masks";
+} from "@/utils/helpers/Masks";
 import { useForm } from "react-hook-form";
 
 export default function DadosEndereco() {
@@ -13,6 +14,7 @@ export default function DadosEndereco() {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<Address>({
     defaultValues: {},
@@ -27,6 +29,18 @@ export default function DadosEndereco() {
     setCheckoutOrderId((orderId || 0) + 1);
     console.log(data);
   };
+
+  useGetAddressByCep(formatToNumber(watch("zip")), {
+    onSuccess: (data) => {
+      setValue("street", data?.logradouro);
+      setValue("district", data?.bairro);
+      setValue("city", data?.cidade.nome);
+      setValue("state", data?.estado.sigla);
+      console.log(data);
+    },
+    refetchOnMount: true,
+    enabled: Boolean(formatToNumber(watch("zip")).length === 8),
+  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

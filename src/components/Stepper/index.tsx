@@ -24,7 +24,7 @@ export default function Stepper({ children, options }: any) {
               <svg
                 className="w-10 h-10 stroke-[#23c274]"
                 id="checkbox"
-                stroke-width="6"
+                strokeWidth={6}
                 viewBox="0 0 100 100"
               >
                 <circle
