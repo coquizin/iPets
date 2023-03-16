@@ -7,9 +7,10 @@ export default function Footer() {
         <div className="flex justify-between min-h-[424px]">
           <div className="flex items-center justify-center min-h-full">
             <Image
-              src={"/assets/images/logoPets.svg"}
-              alt="Logo iPets"
+              alt="logo iPets"
+              src="/assets/images/LogoPets.svg"
               width={90}
+              className="min-w-max"
               height={90}
             />
           </div>
