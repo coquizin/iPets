@@ -8,6 +8,7 @@ module.exports = {
       },
       fontFamily: {
         Jost: ["Jost", "sans-serif"],
+        Oswald: ["Oswald", "sans-serif"],
       },
       colors: {
         primary: "#EDC065",
