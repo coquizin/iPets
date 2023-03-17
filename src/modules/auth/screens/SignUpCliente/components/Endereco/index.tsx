@@ -27,7 +27,7 @@ export default function DadosEndereco() {
 
   const onSubmit = (data: Address) => {
     setCheckoutOrderId((orderId || 0) + 1);
-    console.log(data);
+    window.scrollTo(0, 0);
   };
 
   useGetAddressByCep(formatToNumber(watch("zip")), {
@@ -35,8 +35,7 @@ export default function DadosEndereco() {
       setValue("street", data?.logradouro);
       setValue("district", data?.bairro);
       setValue("city", data?.cidade.nome);
-      setValue("state", data?.estado.sigla);
-      console.log(data);
+      setValue("uf", data?.estado.sigla);
     },
     refetchOnMount: true,
     enabled: Boolean(formatToNumber(watch("zip")).length === 8),
@@ -71,6 +70,7 @@ export default function DadosEndereco() {
               name="zip"
               type="text"
               id="zip"
+              placeholder="00000-000"
               errors={errors.zip}
               register={{
                 ...register("zip", {
@@ -170,6 +170,7 @@ export default function DadosEndereco() {
               label="Estado"
               name="uf"
               type="text"
+              placeholder="UF"
               id="uf"
               errors={errors.uf}
               register={{
@@ -193,12 +194,8 @@ export default function DadosEndereco() {
           Voltar
         </button>
         <button
-          type="button"
+          type="submit"
           className=" max-w-[115px] w-full flex items-center justify-center h-[40px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-medium "
-          onClick={() => {
-            setCheckoutOrderId((orderId || 0) + 1);
-            window.scrollTo(0, 0);
-          }}
         >
           Confirmar
         </button>

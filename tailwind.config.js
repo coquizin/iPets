@@ -6,6 +6,9 @@ module.exports = {
       width: {
         "content-wrapper-max": "1200px",
       },
+      maxWidth: {
+        "content-wrapper-max": "1200px",
+      },
       fontFamily: {
         Jost: ["Jost", "sans-serif"],
         Oswald: ["Oswald", "sans-serif"],
