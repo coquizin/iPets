@@ -7,10 +7,10 @@ import { NAVBAR_HEIGHT_FULL, NAVBAR_HEIGHT } from "@/layouts/constants";
 
 const Cointainer = styled.div`
   background-color: white;
-  margin-top: ${NAVBAR_HEIGHT};
+  padding-top: ${NAVBAR_HEIGHT};
 
   @media (min-width: 768px) {
-    margin-top: ${NAVBAR_HEIGHT_FULL};
+    padding-top: ${NAVBAR_HEIGHT_FULL};
   } ;
 `;
 

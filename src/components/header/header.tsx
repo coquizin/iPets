@@ -15,7 +15,7 @@ export default function Header() {
       <header className="fixed px-4 top-0 right-0 left-0 z-[60] fm:absolute">
         <div
           className={`
-          fixed inset-0 h-16 md:h-24 bg-white fm:hidden ${
+          fixed inset-0 h-16 duration-300 md:h-24 bg-white fm:hidden ${
             isScrolled && " border-b border-[F4EFEA] shadow-sm"
           }
         )`}
@@ -90,10 +90,30 @@ export default function Header() {
         <SideSheet
           isOpen={showMenu}
           onClose={() => setShowMenu(false)}
-          title="test"
           overlay={true}
         >
-          a
+          <ul className="flex flex-col gap-4 mt-4">
+            <li>
+              <Link href={"/"} passHref>
+                <a className="text-[1.1rem] duration-200 ">Home</a>
+              </Link>
+            </li>
+            <li>
+              <Link href={"/"} passHref>
+                <a className="text-[1.1rem] duration-200 ">Explore</a>
+              </Link>
+            </li>
+            <li>
+              <Link href={"/"} passHref>
+                <a className="text-[1.1rem] duration-200 ">Cuidadores</a>
+              </Link>
+            </li>
+            <li>
+              <Link href={"/"} passHref>
+                <a className="text-[1.1rem] duration-200 ">Parceiros</a>
+              </Link>
+            </li>
+          </ul>
         </SideSheet>
       )}
     </>
