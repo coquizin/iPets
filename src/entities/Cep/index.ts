@@ -5,14 +5,10 @@ interface Cep {
   longitude: string;
   logradouro: string;
   bairro: string;
-  cidade: {
-    ddd: number;
-    ibge: string;
-    nome: string;
-  };
-  estado: {
-    sigla: string;
-  };
+  ddd: string;
+  ibge: string;
+  localidade: string;
+  uf: string;
 }
 
 export type { Cep };

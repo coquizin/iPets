@@ -34,8 +34,8 @@ export default function DadosEndereco() {
     onSuccess: (data) => {
       setValue("street", data?.logradouro);
       setValue("district", data?.bairro);
-      setValue("city", data?.cidade.nome);
-      setValue("uf", data?.estado.sigla);
+      setValue("city", data?.localidade);
+      setValue("uf", data?.uf);
     },
     refetchOnMount: true,
     enabled: Boolean(formatToNumber(watch("zip")).length === 8),
