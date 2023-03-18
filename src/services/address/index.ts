@@ -1,6 +1,6 @@
 import { Cep } from "@/entities/Cep";
 import { RawResponse } from "@/entities/Response";
-import { api } from "@/libs/axios";
+import { api, apiCEP } from "@/libs/axios";
 import parseResponseData from "@/utils/parseResponseData";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { ApiError } from "next/dist/server/api-utils";
@@ -12,7 +12,7 @@ export const useGetAddressByCep = (
 ) => {
   return useQuery(
     keyGetAddressByCep(cep),
-    () => api.get<RawResponse<Cep>>(`/cep?q=${cep}`).then(parseResponseData),
+    () => apiCEP.get<RawResponse<Cep>>(`/${cep}/json/`).then(parseResponseData),
     options
   );
 };

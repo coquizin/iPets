@@ -10,13 +10,13 @@ import { CookieKey, readCookie, removeCookie } from "@global-utils/cookies";
 const onResponse = (response: AxiosResponse) => response;
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
   if (
-    window.location.pathname !== `/entrar` &&
-    window.location.pathname !== `/cadastro`
+    window.location.pathname !== `/login` &&
+    window.location.pathname !== `/criar-conta`
   ) {
     if ([401].includes(error.response?.status ?? 0)) {
       removeCookie(CookieKey.JwtAuthToken);
       removeCookie(CookieKey.UserId);
-      window.location.href = `/entrar`;
+      window.location.href = `/login`;
     }
   }
   if ([403].includes(error.response?.status ?? 0)) {
