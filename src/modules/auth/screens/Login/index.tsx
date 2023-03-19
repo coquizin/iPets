@@ -1,75 +1,111 @@
+import Checkbox from "@/components/checkbox";
+import Input from "@/components/input/input";
+import Image from "next/image";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { LoginProps } from "./types";
 
 export default function LoginScreen() {
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    formState: { errors },
+  } = useForm<LoginProps>({
+    defaultValues: { email: "", password: "", rememberMe: false },
+  });
+
+  const onSubmit = (data: LoginProps) => {
+    console.log(data);
+  };
+
   return (
     <div className="flex h-screen text-black">
       <div className="bg-[url('/assets/images/loginPic.jpg')] h-screen bg-no-repeat bg-cover bg-[center] xl:max-w-[60%] md:max-w-[50%] hidden md:block w-full" />
       <div className="w-full xl:max-w-[40%] md:max-w-[50%] bg-white px-5 flex flex-col justify-center items-center">
+        <div className="mb-12 cursor-pointer">
+          <Link href={"/"} passHref>
+            <Image
+              alt="logo iPets"
+              src="/assets/images/LogoPets.svg"
+              width={80}
+              height={80}
+            />
+          </Link>
+        </div>
         <div className="flex flex-col items-center w-full gap-1">
-          <h1 className="md:text-4xl text-3xl font-semibold font-Jost text-[#EDC065]">
+          <h1 className="text-3xl font-semibold md:text-4xl font-Jost text-primary">
             Bem vindo ao iPets.
           </h1>
           <p className="text-sm md:text-base">
             não possui uma conta?{" "}
             <Link href={"/criar-conta"}>
-              <a className="text-[#E9B13F] font-medium">crie aqui.</a>
+              <a className="font-medium text-primary">crie aqui.</a>
             </Link>
           </p>
         </div>
 
-        <form className="w-full ">
-          <div className="flex flex-col items-center w-full mt-16 space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full ">
+          <div className="flex flex-col items-center w-full mt-10 space-y-4">
             <div className="flex flex-col gap-1 max-w-[500px] min-w-[300px] w-full">
-              <label className="font-semibold" htmlFor="email">
-                Email
-              </label>
-              <input
-                type="email"
+              <Input
+                label="Email"
                 name="email"
+                type="email"
                 id="email"
-                className=" w-full max-h-[62px] rounded-md p-5 border-[2px] border-solid border-[#C1CCD6] focus-visible:outline-none"
+                errors={errors.email}
+                register={{
+                  ...register("email", { required: "Email é obrigatório" }),
+                }}
               />
             </div>
 
-            <div className="flex flex-col gap-1 max-w-[500px] min-w-[300px] w-full">
-              <label className="font-semibold" htmlFor="password">
-                Senha
-              </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                className=" w-full max-h-[62px] rounded-md p-5 border-[2px] border-solid border-[#C1CCD6] focus-visible:outline-none"
-              />
-            </div>
-
-            <div className="flex justify-between mb-10 gap-1 max-w-[500px] min-w-[300px] w-full">
-              <div>
-                <label className="space-x-2 cursor-pointer" htmlFor="remember">
-                  <input
-                    type="checkbox"
-                    name="remember"
-                    id="remember"
-                    className=""
-                  />
-                  <span>lembrar dispositivo</span>
-                </label>
+            <div className="max-w-[500px] w-full">
+              <div className="flex flex-col !font-sans gap-1 mb-2 max-w-[500px] min-w-[300px] w-full">
+                <Input
+                  label="Senha"
+                  name="password"
+                  type="password"
+                  id="password"
+                  errors={errors.password}
+                  register={{
+                    ...register("password", {
+                      required: "Senha é obrigatória",
+                    }),
+                  }}
+                />
               </div>
-              <Link href={"/esqueci-a-senha"} passHref>
-                <a className="text-[#E9B13F] hover:underline duration-150 font-medium">
-                  esqueci a senha
-                </a>
-              </Link>
+
+              <div className="flex justify-between mb-10 gap-1 max-w-[500px] min-w-[300px] w-full">
+                <Checkbox
+                  name="rememberMe"
+                  id="rememberMe"
+                  checked={getValues("rememberMe")}
+                  register={register}
+                  getValues={getValues("rememberMe")}
+                >
+                  lembrar senha
+                </Checkbox>
+                <Link href={"/esqueci-a-senha"} passHref>
+                  <a className="text-[#E9B13F] hover:underline duration-150 font-medium">
+                    esqueci a senha
+                  </a>
+                </Link>
+              </div>
             </div>
 
             <div className="flex flex-col items-center justify-center w-full gap-5">
               <button
-                className="md:max-w-[400px] max-w-[300px] w-full flex items-center justify-center h-[62px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-10 text-white text-lg font-semibold uppercase"
+                className="md:max-w-[400px] max-w-[300px] w-full flex items-center justify-center h-[62px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-semibold uppercase"
                 type="submit"
               >
                 Entrar
               </button>
-              <button className="md:max-w-[400px] max-w-[300px] w-full relative flex items-center justify-center h-[62px] border-2 border-solid border-[#C1CCD6] rounded-md text-black/[54%] text-lg font-semibold">
+              <button
+                type="button"
+                className="md:max-w-[400px] max-w-[300px] w-full relative flex items-center justify-center h-[62px] border-2 border-solid border-[#C1CCD6] rounded-md text-black/[54%] text-lg font-semibold"
+              >
                 <div className="absolute left-5">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

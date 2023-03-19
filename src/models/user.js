@@ -1,12 +1,20 @@
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
-  name: { type: string, requeired: true },
-  login: { type: string, required: true },
-  password: { type: string, required: true },
+  name: { type: String, required: false },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  pets: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Pet",
+      required: false,
+    },
+  ],
   history: [
     {
       type: mongoose.Schema.Types.ObjectId,
+      ref: "History",
       required: false,
     },
   ],
@@ -31,4 +39,5 @@ const userSchema = mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("users", userSchema);
+module.exports = User;

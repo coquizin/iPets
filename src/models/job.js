@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const jobSchema = mongoose.Schema({
   title: { type: string, requeired: true },
