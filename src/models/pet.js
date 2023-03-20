@@ -6,13 +6,21 @@ const petSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
-  size: {
+  name: {
     type: String,
     required: true,
   },
   specie: {
     type: String,
     required: true,
+  },
+  age: {
+    type: Number,
+    required: true,
+  },
+  complement: {
+    type: String,
+    required: false,
   },
 });
 

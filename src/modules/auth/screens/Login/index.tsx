@@ -4,8 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { LoginProps } from "./types";
+import { useRouter } from "next/router";
 
 export default function LoginScreen() {
+  const route = useRouter();
   const {
     register,
     handleSubmit,
@@ -16,10 +18,28 @@ export default function LoginScreen() {
     defaultValues: { email: "", password: "", rememberMe: false },
   });
 
-  const onSubmit = (data: LoginProps) => {
+  const onSubmit = async (data: LoginProps) => {
+    try {
+      const res = await fetch("http://localhost:8080/loginUser", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const responseEnv = await res.json();
+
+      if (responseEnv.erro) {
+        console.log(responseEnv.erro);
+      } else {
+        route.push("/");
+        console.log("sucesso");
+      }
+    } catch (err) {
+      console.log("Erro");
+    }
+
     console.log(data);
   };
-
   return (
     <div className="flex h-screen text-black">
       <div className="bg-[url('/assets/images/loginPic.jpg')] h-screen bg-no-repeat bg-cover bg-[center] xl:max-w-[60%] md:max-w-[50%] hidden md:block w-full" />

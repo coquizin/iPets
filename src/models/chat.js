@@ -13,7 +13,7 @@ const chatSchema = mongoose.Schema({
   },
   messages: [
     {
-      type: string,
+      type: String,
       required: true,
     },
   ],

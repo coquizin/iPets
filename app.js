@@ -26,7 +26,8 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.post("/saveUser", UserController.post);
+app.post("/saveUser", UserController.sigIn);
+app.post("/loginUser", UserController.login);
 
 app.listen(8080, () => {
   database.connect();

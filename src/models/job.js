@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
 const jobSchema = mongoose.Schema({
-  title: { type: string, requeired: true },
-  description: { type: string, required: true },
+  title: { type: String, requeired: true },
+  description: { type: String, required: true },
   cost: { type: Number, required: true },
   address: {
     type: mongoose.Schema.Types.ObjectId,

@@ -1,7 +1,7 @@
 const User = require("../models/user.js");
 
 module.exports = {
-  async post(req, res) {
+  async sigIn(req, res) {
     const { email } = req.body;
     const { password } = req.body;
     const user = new User({ email: email, password: password });
@@ -17,6 +17,24 @@ module.exports = {
     }
   },
 
+  async login(req, res) {
+    const { email } = req.body;
+    const { password } = req.body;
+    const user = await User.find({ email: email }).exec();
+    const exists = await User.exists({ email: email });
+    if (!exists) {
+      return res.json({ erro: true });
+    }
+    if (user[0].password === password) {
+      return res.json({
+        erro: false,
+        mensagem: "Usuário logado com sucesso!",
+      });
+    } else {
+      return res.json({ erro: "Senha incorreta" });
+    }
+  },
+
   async get(req, res) {
     const documents = await User.find();
     if (documents) {
@@ -27,4 +45,8 @@ module.exports = {
       return res.json({ erro: "Não há usuários cadastrados ainda" });
     }
   },
+
+  async edit(req, res) {},
+
+  async delete(req, res) {},
 };
