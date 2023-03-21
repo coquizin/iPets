@@ -1,12 +1,9 @@
 import Image from "next/image";
 import { Verified } from "@styled-icons/material";
 
-const BestWorkers = ({ key = 0 }) => {
+const BestWorkers = () => {
   return (
-    <div
-      key={key}
-      className="flex gap-5 border items-center hover:border-[#7a7977] border-transparent max-w-fit cursor-default p-2 rounded-md px-4 hover:shadow-md"
-    >
+    <div className="flex gap-5 border items-center hover:border-[#7a7977] border-transparent max-w-fit cursor-default p-2 rounded-md px-4 hover:shadow-md">
       <div>
         <Image
           src={"/assets/images/bestPro.jpg"}
