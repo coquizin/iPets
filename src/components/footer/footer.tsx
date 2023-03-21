@@ -30,9 +30,9 @@ export default function Footer() {
               <p className="text-[#F4EFEA] mb-2 text-lg font-medium">
                 Links úteis
               </p>
-              {lorenIpson.map((link) => (
+              {lorenIpson.map((link, idx) => (
                 <span
-                  key={link}
+                  key={idx}
                   className="text-sm text-[#F4EFEA]/[.8] hover:text-[#f4efea] cursor-pointer"
                 >
                   loren ipson
@@ -56,9 +56,9 @@ export default function Footer() {
               <p className="text-[#F4EFEA] mb-2 text-lg font-medium">
                 Opções do site
               </p>
-              {lorenIpson.map((link) => (
+              {lorenIpson.map((link, idx) => (
                 <span
-                  key={link}
+                  key={idx}
                   className="text-sm text-[#F4EFEA]/[.8] hover:text-[#f4efea] cursor-pointer"
                 >
                   loren ipson

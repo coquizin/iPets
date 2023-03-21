@@ -15,6 +15,7 @@ export default function DadosEndereco() {
     handleSubmit,
     setValue,
     watch,
+    clearErrors,
     formState: { errors },
   } = useForm<Address>({
     defaultValues: {},
@@ -36,6 +37,7 @@ export default function DadosEndereco() {
       setValue("district", data?.bairro);
       setValue("city", data?.localidade);
       setValue("uf", data?.uf);
+      clearErrors(["street", "district", "city", "uf"]);
     },
     refetchOnMount: true,
     enabled: Boolean(formatToNumber(watch("zip")).length === 8),
