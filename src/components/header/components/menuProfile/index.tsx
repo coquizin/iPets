@@ -8,8 +8,14 @@ import { CreditCard } from "@styled-icons/bootstrap";
 import { HelpCircle } from "@styled-icons/boxicons-regular";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { MenuProfileProps } from "./types";
 
-const MenuProfile = ({ setShowMenu, isOpen }) => {
+const MenuProfile = ({
+  setShowMenu,
+  isOpen,
+  avatar,
+  username,
+}: MenuProfileProps) => {
   const [animationOff, setAnimationOff] = useState<boolean>(false);
 
   useEffect(() => {
@@ -38,14 +44,14 @@ const MenuProfile = ({ setShowMenu, isOpen }) => {
           <div className="flex items-center justify-center rounded-full w-14 h-14">
             <Image
               alt="foto de perfil"
-              src="/assets/images/profile.jpg"
+              src={avatar}
               width={56}
               height={56}
               className="rounded-full"
             />
           </div>
           <div>
-            <span className="text-xl font-medium">Cauli</span>
+            <span className="text-xl font-medium">{username}</span>
             <div className="flex items-end gap-1">
               <VipCrown className="text-amber-500" size={20} />
               <span className="text-sm font-medium text-amber-500">
