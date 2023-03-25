@@ -24,6 +24,28 @@ module.exports = {
         "auto-768px": "repeat(auto-fill,minmax(max(320px,50% - 32px),1fr))",
         "auto-repeat": "repeat(auto-fill,minmax(280px,1fr))",
       },
+      animation: {
+        "height-in": "height-in 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+        "height-out": "height-out 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+      },
+      keyframes: {
+        "height-in": {
+          "0%": {
+            height: "0",
+          },
+          "100%": {
+            height: "100%",
+          },
+        },
+        "height-out": {
+          "0%": {
+            height: "100%",
+          },
+          "100%": {
+            height: "0",
+          },
+        },
+      },
     },
   },
   plugins: [
