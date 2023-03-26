@@ -9,6 +9,7 @@ import { HelpCircle } from "@styled-icons/boxicons-regular";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MenuProfileProps } from "./types";
+import { useRouter } from "next/router";
 
 const MenuProfile = ({
   setShowMenu,
@@ -17,6 +18,7 @@ const MenuProfile = ({
   username,
 }: MenuProfileProps) => {
   const [animationOff, setAnimationOff] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (isOpen) {
@@ -94,7 +96,10 @@ const MenuProfile = ({
           </Link>
         </div>
 
-        <div className="flex items-center p-4 cursor-pointer hover:bg-slate-200">
+        <div
+          onClick={() => router.replace(`/logout`)}
+          className="flex items-center p-4 cursor-pointer hover:bg-slate-200"
+        >
           <SignOut size={20} className="text-secundary" />
           <span className="ml-2 text-sm font-medium">Sair</span>
         </div>

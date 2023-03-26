@@ -138,7 +138,7 @@ export default function DadosPets() {
           type="button"
           className=" max-w-[115px] w-full flex items-center justify-center h-[40px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-medium "
           onClick={() => {
-            router.push("/");
+            router.replace("/");
           }}
         >
           Confirmar

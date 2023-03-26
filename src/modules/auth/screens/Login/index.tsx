@@ -1,11 +1,15 @@
 import Checkbox from "@/components/checkbox";
 import Input from "@/components/input/input";
+import { useAuthScreen } from "@/stores/useAuth";
+import { CookieKey, setCookie } from "@/utils/cookies";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { LoginProps } from "./types";
 
 export default function LoginScreen() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -16,8 +20,14 @@ export default function LoginScreen() {
     defaultValues: { email: "", password: "", rememberMe: false },
   });
 
+  const setAuthScreen = useAuthScreen((state) => state.setAuthScreen);
+
   const onSubmit = (data: LoginProps) => {
     console.log(data);
+    setAuthScreen(true, "login");
+    setCookie(CookieKey.JwtAuthToken, "1");
+    setCookie(CookieKey.UserId, "1");
+    router.replace("/");
   };
 
   return (
@@ -26,12 +36,14 @@ export default function LoginScreen() {
       <div className="w-full xl:max-w-[40%] md:max-w-[50%] bg-white px-5 flex flex-col justify-center items-center">
         <div className="mb-12 cursor-pointer">
           <Link href={"/"} passHref>
-            <Image
-              alt="logo iPets"
-              src="/assets/images/LogoPets.svg"
-              width={80}
-              height={80}
-            />
+            <a>
+              <Image
+                alt="logo iPets"
+                src="/assets/images/LogoPets.svg"
+                width={80}
+                height={80}
+              />
+            </a>
           </Link>
         </div>
         <div className="flex flex-col items-center w-full gap-1">

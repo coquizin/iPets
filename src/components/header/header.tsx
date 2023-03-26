@@ -6,14 +6,14 @@ import SideSheet from "./components/sidesheet";
 import { MenuToggle, MenuToggleSpan } from "./styles";
 import { ArrowDown } from "@styled-icons/evaicons-solid";
 import MenuProfile from "./components/menuProfile";
+import { useAuthScreen } from "@/stores/useAuth";
 
 export default function Header() {
   const isScrolled = useScroll(0);
 
   const [showMenu, setShowMenu] = useState(false);
   const [showMenuUser, setShowMenuUser] = useState(false);
-
-  const user = true;
+  const user = useAuthScreen((state) => state.data.show);
 
   return (
     <>
@@ -36,18 +36,20 @@ export default function Header() {
             </div>
 
             <Link href={"/"} passHref>
-              <div className="flex gap-2 -ml-5 cursor-pointer md:ml-0 justify-self-center md:justify-self-start md:max-w-fit">
-                <Image
-                  alt="logo iPets"
-                  src="/assets/images/LogoPets.svg"
-                  width={32}
-                  className="min-w-max"
-                  height={32}
-                />
-                <div className="flex justify-center text-3xl font-medium text-yellow-500">
-                  iPets
+              <a>
+                <div className="flex gap-2 -ml-5 cursor-pointer md:ml-0 justify-self-center md:justify-self-start md:max-w-fit">
+                  <Image
+                    alt="logo iPets"
+                    src="/assets/images/LogoPets.svg"
+                    width={32}
+                    className="min-w-max"
+                    height={32}
+                  />
+                  <div className="flex justify-center text-3xl font-medium text-yellow-500">
+                    iPets
+                  </div>
                 </div>
-              </div>
+              </a>
             </Link>
 
             <nav className="justify-center hidden text-secundary md:flex">
