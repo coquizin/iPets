@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useQueryClient } from "react-query";
 import { removeCookie, CookieKey } from "@global-utils/cookies";
 
 import { ROUTES } from "@configs/routes";
 import Auth from "@/layouts/Auth";
 import { useAuthScreen } from "@/stores/useAuth";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Logout = () => {
   const { replace } = useRouter();
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const setAuthScreen = useAuthScreen((state) => state.setAuthScreen);
 
   useEffect(() => {
@@ -17,10 +17,10 @@ const Logout = () => {
     removeCookie(CookieKey.UserId);
     setAuthScreen(false, "");
 
-    // queryClient.clear();
+    queryClient.clear();
 
     replace(ROUTES.PRIVATE.ROOT());
-  }, [replace, setAuthScreen]);
+  }, [queryClient, replace, setAuthScreen]);
 
   return null;
 };
