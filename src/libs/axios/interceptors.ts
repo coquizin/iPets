@@ -28,7 +28,7 @@ const onResponseError = (error: AxiosError): Promise<AxiosError> => {
 
 const onRequest = async (config: AxiosRequestConfig) => {
   const { headers = {} } = config;
-  headers[`X-iPets`] = `User`;
+  headers[`X-iPets`] = `Website`;
 
   if (typeof document !== `undefined`) {
     const token = readCookie(CookieKey.JwtAuthToken, document.cookie);

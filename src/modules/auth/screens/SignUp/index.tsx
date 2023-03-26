@@ -4,9 +4,10 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { SignInProps } from "./types";
 import { useRouter } from "next/router";
+import { useAuthScreen } from "@/stores/useAuth";
 
 export default function SignUpScreen() {
-  const route = useRouter();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -15,8 +16,11 @@ export default function SignUpScreen() {
     defaultValues: { email: "", password: "" },
   });
 
+  const setAuthScreen = useAuthScreen((state) => state.setAuthScreen);
+
   const onSubmit = (data: SignInProps) => {
-    route.push("criar-conta/cliente");
+    router.push("criar-conta/cliente");
+    setAuthScreen(true, "register");
     console.log(data);
   };
 
@@ -26,12 +30,14 @@ export default function SignUpScreen() {
       <div className="w-full xl:max-w-[40%] md:max-w-[50%] min-h-screen bg-white px-5 py-20 flex flex-col justify-center items-center">
         <div className="mb-5 cursor-pointer">
           <Link href={"/"} passHref>
-            <Image
-              alt="logo iPets"
-              src="/assets/images/LogoPets.svg"
-              width={80}
-              height={80}
-            />
+            <a>
+              <Image
+                alt="logo iPets"
+                src="/assets/images/LogoPets.svg"
+                width={80}
+                height={80}
+              />
+            </a>
           </Link>
         </div>
         <div className="flex flex-col items-center w-full gap-1">
