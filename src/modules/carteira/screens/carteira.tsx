@@ -29,7 +29,7 @@ export default function CarteiraScreen() {
           <h1 className="text-xl font-medium opacity-80">
             Formas de pagamento
           </h1>
-          <div className="flex mt-10 md:gap-9 gap-7">
+          <div className="flex flex-wrap mt-10 md:gap-9 gap-7">
             <div className="flex cursor-pointer flex-col gap-2 min-h-[150px] w-[150px] hover:bg-black/5 duration-200 justify-between p-4 rounded-md border-2 border-[#F4EFEA]">
               <Plus size={30} className="text-yellow-500" />
               <div className="flex flex-col opacity-80">
@@ -38,30 +38,33 @@ export default function CarteiraScreen() {
               </div>
             </div>
 
-            {array.map((item) => (
-              <div
-                key={item}
-                className="flex cursor-pointer flex-col gap-2 min-h-[150px] w-[150px] hover:bg-black/5 duration-200 justify-between p-4 rounded-md border-2 border-[#F4EFEA]"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="rounded-md w-[35px] h-[25px]">
-                    <Image
-                      src={"/assets/images/mastercard.png"}
-                      width={35}
-                      height={25}
-                      alt="Logo Credit Card"
-                      className="flex rounded-md"
-                      objectFit="contain"
-                    />
+            {array.map((item, idx) => {
+              if (idx <= 1)
+                return (
+                  <div
+                    key={item}
+                    className="flex cursor-pointer flex-col gap-2 min-h-[150px] w-[150px] hover:bg-black/5 duration-200 justify-between p-4 rounded-md border-2 border-[#F4EFEA]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="rounded-md w-[35px] h-[25px]">
+                        <Image
+                          src={"/assets/images/mastercard.png"}
+                          width={35}
+                          height={25}
+                          alt="Logo Credit Card"
+                          className="flex rounded-md"
+                          objectFit="contain"
+                        />
+                      </div>
+                      <span className=" opacity-80">crédito</span>
+                    </div>
+                    <div className="flex flex-col opacity-80">
+                      <span>MasterCard</span>
+                      <span className="font-medium">7195</span>
+                    </div>
                   </div>
-                  <span className=" opacity-80">crédito</span>
-                </div>
-                <div className="flex flex-col opacity-80">
-                  <span>MasterCard</span>
-                  <span className="font-medium">7195</span>
-                </div>
-              </div>
-            ))}
+                );
+            })}
 
             <div className="flex cursor-pointer flex-col gap-2 min-h-[150px] w-[150px] hover:bg-black/5 duration-200 justify-between p-4 rounded-md border-2 border-[#F4EFEA]">
               <CreditCard size={25} className="text-yellow-500" />

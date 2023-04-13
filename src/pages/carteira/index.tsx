@@ -5,16 +5,16 @@ import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
 import { NAVBAR_HEIGHT, NAVBAR_HEIGHT_FULL } from "@/layouts/constants";
 
+const Cointainer = styled.div`
+  background-color: white;
+  padding-top: ${NAVBAR_HEIGHT};
+
+  @media (min-width: 768px) {
+    padding-top: ${NAVBAR_HEIGHT_FULL};
+  } ;
+`;
+
 const Carteira = () => {
-  const Cointainer = styled.div`
-    background-color: white;
-    padding-top: ${NAVBAR_HEIGHT};
-
-    @media (min-width: 768px) {
-      padding-top: ${NAVBAR_HEIGHT_FULL};
-    } ;
-  `;
-
   return (
     <>
       <Head>
