@@ -101,7 +101,7 @@ export default function Header() {
                 </div>
                 {showMenuUser && (
                   <MenuProfile
-                    username="Cauli"
+                    username="Anya"
                     avatar="/assets/images/profile.jpg"
                     isOpen={showMenuUser}
                     setShowMenu={setShowMenuUser}
