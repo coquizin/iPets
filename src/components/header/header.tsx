@@ -41,13 +41,13 @@ export default function Header() {
                   <Image
                     alt="logo iPets"
                     src="/assets/images/LogoPets.svg"
-                    width={32}
+                    width={45}
                     className="min-w-max"
-                    height={32}
+                    height={45}
                   />
-                  <div className="flex justify-center text-3xl font-medium text-yellow-500">
+                  {/* <div className="flex justify-center text-3xl font-medium text-yellow-500">
                     iPets
-                  </div>
+                  </div> */}
                 </div>
               </a>
             </Link>
@@ -101,7 +101,7 @@ export default function Header() {
                 </div>
                 {showMenuUser && (
                   <MenuProfile
-                    username="Cauli"
+                    username="Anya"
                     avatar="/assets/images/profile.jpg"
                     isOpen={showMenuUser}
                     setShowMenu={setShowMenuUser}

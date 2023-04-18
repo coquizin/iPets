@@ -41,13 +41,13 @@ export default function SignUpScreen() {
           </Link>
         </div>
         <div className="flex flex-col items-center w-full gap-1">
-          <h1 className="text-3xl font-semibold md:text-4xl font-Jost text-primary">
+          <h1 className="text-3xl font-semibold md:text-4xl font-Jost text-secundary">
             Bem vindo ao iPets.
           </h1>
           <p className="text-sm md:text-base">
             já possui uma conta?{" "}
             <Link href={"/login"}>
-              <a className="font-medium text-primary">entre aqui.</a>
+              <a className="font-medium text-secundary">entre aqui.</a>
             </Link>
           </p>
         </div>
