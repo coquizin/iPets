@@ -6,6 +6,10 @@ module.exports = {
       width: {
         "content-wrapper-max": "1200px",
       },
+      boxShadow: {
+        shadowInner: "inset 0 -80px 0 0px rgb(255, 255, 255)",
+        "shadow-inner-2": "inset 0 0 0 2px rgb(255, 255, 255)",
+      },
       maxWidth: {
         "content-wrapper-max": "1200px",
       },
