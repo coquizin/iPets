@@ -37,7 +37,7 @@ export default function Header() {
 
             <Link href={"/"} passHref>
               <a>
-                <div className="flex gap-2 -ml-5 cursor-pointer md:ml-0 justify-self-center md:justify-self-start md:max-w-fit">
+                <div className="flex justify-center gap-2 cursor-pointer md:ml-0 justify-self-center md:justify-self-start md:max-w-fit">
                   <Image
                     alt="logo iPets"
                     src="/assets/images/LogoPets.svg"

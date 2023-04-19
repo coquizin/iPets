@@ -13,6 +13,8 @@ import {
   formatToValidate,
 } from "@/utils/helpers/Masks";
 import { Close } from "@styled-icons/ionicons-solid";
+import { CardModalContainer } from "./styles";
+// import { cardModalContainer } from "./styles";
 
 type CardProps = {
   cardNumber: string;
@@ -63,7 +65,6 @@ export default function CarteiraScreen() {
           </div>
         </div>
       </div>
-
       <div className="flex flex-col items-center px-6 mt-10 bg-white">
         <div className="flex flex-col items-start w-full max-w-content-wrapper-max">
           <h1 className="text-xl font-medium opacity-80">
@@ -184,10 +185,7 @@ export default function CarteiraScreen() {
             onClick={() => setShowModalCC(false)}
             className="fixed top-0 bottom-0 left-0 right-0 z-[80] w-screen h-screen bg-black/80"
           />
-          <div
-            onClick={() => setBackView(false)}
-            className="fixed -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg z-[80] left-1/2 max-w-[500px] w-full top-1/2 p-6  rounded-md"
-          >
+          <CardModalContainer onClick={() => setBackView(false)}>
             <div className="flex flex-col items-center gap-6">
               <div className="flex justify-between w-full">
                 <h1 className="text-2xl font-medium">
@@ -303,7 +301,7 @@ export default function CarteiraScreen() {
                 </div>
               </form>
             </div>
-          </div>
+          </CardModalContainer>
         </>
       )}
     </>
