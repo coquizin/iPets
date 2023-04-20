@@ -18,6 +18,7 @@ const Cointainer = styled.div`
 const Anunciante = () => {
   const router = useRouter();
   const namepage = router.query.slug as string;
+  console.log(namepage);
   return (
     <>
       <Head>

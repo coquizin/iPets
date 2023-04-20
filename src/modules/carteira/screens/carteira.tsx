@@ -293,7 +293,7 @@ export default function CarteiraScreen() {
                   <div className="flex justify-end w-full mt-4">
                     <button
                       type="submit"
-                      className="flex items-center justify-center  px-4 py-2 text-[1.1rem] font-medium duration-200 rounded-md bg-yellow-500 text-white"
+                      className="flex items-center justify-center  px-4 py-2 text-[1.1rem] font-medium duration-200 rounded-md  bg-yellow-500  border border-black"
                     >
                       Cadastrar
                     </button>
