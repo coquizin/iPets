@@ -9,6 +9,7 @@ import { queryClient } from "@/libs/react-query";
 import { keyListConsumer } from "@/services/consumers/keys";
 import { Consumer } from "@/entities/Consumer/consumer";
 import { CookieKey, setCookie } from "@/utils/cookies";
+import { useCreateId } from "@/stores/useId";
 
 export default function SignUpScreen() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function SignUpScreen() {
     defaultValues: { email: "", password: "" },
   });
 
-  const setAuthScreen = useAuthScreen((state) => state.setAuthScreen);
+  const setIdGlobal = useCreateId((state) => state.setIdGlobal);
 
   const { mutate, isLoading } = useCreateConsumer({
     onSuccess: async (res) => {
@@ -29,8 +30,8 @@ export default function SignUpScreen() {
       const data = JSON.parse(res as string);
       setCookie(CookieKey.UserId, data._id.$oid);
       setCookie(CookieKey.JwtAuthToken, data._id.$oid);
-      router.push(`criar-conta/cliente/${data._id.$oid}`);
-      setAuthScreen(true, "register");
+      router.push(`/criar-conta/cliente/${data._id.$oid}`);
+      setIdGlobal(data._id.$oid);
     },
     onError: (error: any) => {
       if (error?.response) {

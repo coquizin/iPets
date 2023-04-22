@@ -1,7 +1,7 @@
 import { Meta } from "@entities/Meta";
 import { Address } from "../Address/address";
 import { Pets } from "../Pets/pets";
-import { CreditCard } from "../CreditCard/creditcard";
+import { CreditCardModel } from "../CreditCard";
 
 export interface Consumer {
   _id?: string;
@@ -12,7 +12,7 @@ export interface Consumer {
   birthDate?: string;
   password?: string;
   address?: Address;
-  creditCard?: CreditCard;
+  creditCard?: CreditCardModel;
   avatar?: string;
   pets?: Pets[];
 }

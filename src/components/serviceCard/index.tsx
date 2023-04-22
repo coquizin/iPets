@@ -104,7 +104,7 @@ const ServiceCard = ({ setShowModal, data }: Props) => {
           <div className="flex items-end justify-end w-full h-full">
             <button
               disabled={isLoading}
-              className="px-4 py-2 mt-4 text-black bg-yellow-500 border rounded-md border-secundary "
+              className="px-4 py-2 mt-4 text-black bg-yellow-500 border rounded-md disabled:opacity-50 border-secundary "
             >
               {isLoading ? "Agendando" : "Agendar"}
             </button>

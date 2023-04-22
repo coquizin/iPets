@@ -6,21 +6,22 @@ import { ROUTES } from "@configs/routes";
 import Auth from "@/layouts/Auth";
 import { useAuthScreen } from "@/stores/useAuth";
 import { useQueryClient } from "@tanstack/react-query";
+import { useCreateId } from "@/stores/useId";
 
 const Logout = () => {
   const { replace } = useRouter();
   const queryClient = useQueryClient();
-  const setAuthScreen = useAuthScreen((state) => state.setAuthScreen);
+  const setIdGlobal = useCreateId((state) => state.setIdGlobal);
 
   useEffect(() => {
     removeCookie(CookieKey.JwtAuthToken);
     removeCookie(CookieKey.UserId);
-    setAuthScreen(false, "");
+    setIdGlobal("");
 
     queryClient.clear();
 
     replace(ROUTES.PRIVATE.ROOT());
-  }, [queryClient, replace, setAuthScreen]);
+  }, [queryClient, replace, setIdGlobal]);
 
   return null;
 };

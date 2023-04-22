@@ -6,4 +6,5 @@ export interface Pets extends Meta {
   race: string;
   age: string;
   description: string;
+  avatar: string;
 }

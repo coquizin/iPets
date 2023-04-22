@@ -161,7 +161,7 @@ export default function DadosClientes() {
         <button
           type="submit"
           disabled={isLoading}
-          className=" max-w-[115px] w-full flex items-center justify-center h-[40px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+          className=" max-w-[115px] w-full flex items-center justify-center h-[40px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-medium disabled:opacity-50 "
         >
           {isLoading ? "Carregando" : "Continuar"}
         </button>
