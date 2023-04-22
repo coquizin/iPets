@@ -3,7 +3,7 @@ import { API_URL } from "@configs/environment";
 import { setupInterceptors } from "./interceptors";
 
 export const api = axios.create({
-  baseURL: API_URL,
+  baseURL: "https://ipets.azurewebsites.net/",
 });
 
 export const apiCEP = axios.create({
