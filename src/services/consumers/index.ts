@@ -18,7 +18,7 @@ export const useListConsumer = () => {
   );
 };
 
-export const useGetCostumer = (id: number) => {
+export const useGetCostumer = (id: string) => {
   return useQuery(
     keyGetConsumer(id),
     () =>

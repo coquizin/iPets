@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { LoginProps } from "./types";
+import { useListConsumer } from "@/services/consumers";
+import { useCreateId } from "@/stores/useId";
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -15,19 +17,37 @@ export default function LoginScreen() {
     handleSubmit,
     getValues,
     setValue,
+    setError,
     formState: { errors },
   } = useForm<LoginProps>({
     defaultValues: { email: "", password: "", rememberMe: false },
   });
 
-  const setAuthScreen = useAuthScreen((state) => state.setAuthScreen);
+  const consumers = useListConsumer();
+  const setIdGlobal = useCreateId((state) => state.setIdGlobal);
 
   const onSubmit = (data: LoginProps) => {
-    console.log(data);
-    setAuthScreen(true, "login");
-    setCookie(CookieKey.JwtAuthToken, "1");
-    setCookie(CookieKey.UserId, "1");
-    router.replace("/");
+    const consumer = consumers.data?.find(
+      (consumer) =>
+        consumer.email === data.email && consumer.password === data.password
+    );
+
+    if (consumer?._id) {
+      setCookie(CookieKey.UserId, consumer?._id);
+      setCookie(CookieKey.JwtAuthToken, consumer?._id);
+      setIdGlobal(consumer?._id);
+      router.replace("/");
+    } else {
+      setError("email", {
+        type: "manual",
+        message: "Email ou senha incorretos",
+      });
+    }
+
+    // setAuthScreen(true, "login");
+    // setCookie(CookieKey.JwtAuthToken, "1");
+    // setCookie(CookieKey.UserId, "1");
+    // router.replace("/");
   };
 
   return (

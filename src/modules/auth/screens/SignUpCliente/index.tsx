@@ -19,7 +19,11 @@ export default function SignUpClienteScreen() {
       case 2:
         return <DadosPets />;
       default:
-        return <></>;
+        return (
+          <div className="flex items-center justify-center w-full h-full">
+            <h1>Carregando...</h1>
+          </div>
+        );
     }
   }, [orderId]);
 

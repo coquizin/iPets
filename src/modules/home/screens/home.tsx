@@ -11,8 +11,6 @@ export default function HomeScreen() {
   const dataServices = useListService();
   const dataProvider = useListProvider();
 
-  console.log(dataServices.data);
-
   return (
     <>
       <StyledDiv className="flex flex-col items-center justify-center px-6 py-10 pt-7">
@@ -98,7 +96,7 @@ export default function HomeScreen() {
           </div>
         </div>
         <div className="flex justify-center w-full mt-20 max-w-content-wrapper-max">
-          <GuideDog className="text-red-600 w-60 h-60" />
+          <GuideDog className="text-yellow-600 w-60 h-60" />
         </div>
       </div>
     </>

@@ -44,13 +44,19 @@ const MenuProfile = ({
       >
         <div className="flex items-center gap-3 p-4 border-b cursor-default group">
           <div className="flex items-center justify-center rounded-full w-14 h-14">
-            <Image
-              alt="foto de perfil"
-              src={avatar}
-              width={56}
-              height={56}
-              className="rounded-full"
-            />
+            {avatar ? (
+              <Image
+                alt="foto de perfil"
+                src={`data:image/jpg;base64, ${avatar}`}
+                width={56}
+                height={56}
+                className="rounded-full"
+              />
+            ) : (
+              <div className="flex items-center justify-center w-10 h-10 text-white uppercase bg-blue-900 rounded-full">
+                {username?.slice(0, 2) as string}
+              </div>
+            )}
           </div>
           <div>
             <span className="text-xl font-medium">{username}</span>
