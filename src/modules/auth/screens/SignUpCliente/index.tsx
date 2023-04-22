@@ -19,7 +19,7 @@ export default function SignUpClienteScreen() {
       case 2:
         return <DadosPets />;
       default:
-        return <DadosClientes />;
+        return <></>;
     }
   }, [orderId]);
 

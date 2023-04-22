@@ -1,6 +1,6 @@
 import { Cep } from "@/entities/Cep";
 import { RawResponse } from "@/entities/Response";
-import { api, apiCEP } from "@/libs/axios";
+import { apiCEP } from "@/libs/axios";
 import parseResponseData from "@/utils/parseResponseData";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { ApiError } from "next/dist/server/api-utils";

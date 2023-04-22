@@ -3,11 +3,24 @@ import { Star } from "@styled-icons/boxicons-solid";
 import { Heart, HeartOutlined } from "@styled-icons/entypo";
 import { useState } from "react";
 import ServiceCard from "@/components/serviceCard";
+import { useRouter } from "next/router";
+import { useGetProvider } from "@/services/providers";
+import { useListService } from "@/services/services";
+import { formatToBRL } from "brazilian-values";
+import ContentLoader from "react-content-loader";
+import { ServiceModel } from "@/entities/ServiceModel";
+import { useListRequest } from "@/services/requests";
 
 const LojaScreen = () => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [data, setData] = useState<ServiceModel>();
+  const router = useRouter();
+  const { id } = router.query;
+  const [showModalService, setShowModalService] = useState(false);
+  const { data: provider, isLoading } = useGetProvider(id as string);
+  const allServices = useListService();
 
-  const array = [1, 2, 3, 4, 5];
+  const services = allServices.data?.filter((item) => item.providerId === id);
 
   return (
     <>
@@ -26,20 +39,56 @@ const LojaScreen = () => {
           </div>
           <div className="relative flex px-8 mt-5 ">
             <div className="md:max-w-[180px] absolute top-0 left-6 -translate-y-1/2 flex md:min-h-[180px] min-h-[120px] max-w-[120px]">
-              <Image
-                src="/assets/images/profile.jpg"
-                alt="Picture of the author"
-                width={180}
-                height={180}
-                objectFit="cover"
-                className="min-w-full min-h-full duration-300 rounded-3xl "
-              />
+              {isLoading ? (
+                <ContentLoader
+                  height={180}
+                  speed={2}
+                  backgroundColor={`#616161`}
+                  foregroundColor={`#a3a3a3`}
+                  viewBox="0 0 100 100"
+                  width={`100%`}
+                >
+                  <rect x="0" y="0" rx="5" ry="5" className="w-full h-full" />
+                </ContentLoader>
+              ) : provider?.avatar ? (
+                <Image
+                  src={`data:image/jpg;base64, ${provider?.avatar}`}
+                  alt="Picture of the author"
+                  width={180}
+                  height={180}
+                  objectFit="cover"
+                  className="min-w-full min-h-full duration-300 rounded-3xl "
+                />
+              ) : (
+                <Image
+                  src="/assets/images/profile.jpg"
+                  alt="Picture of the author"
+                  width={180}
+                  height={180}
+                  objectFit="cover"
+                  className="min-w-full min-h-full duration-300 rounded-3xl "
+                />
+              )}
             </div>
             <div className="flex ml-[130px] md:ml-[210px] justify-between">
               <div>
-                <h1 className="text-2xl font-medium md:text-3xl">
-                  Valquíria Pets e acessorios
-                </h1>
+                {isLoading ? (
+                  <ContentLoader
+                    height={37}
+                    width={"100%"}
+                    speed={2}
+                    backgroundColor={`#616161`}
+                    foregroundColor={`#a3a3a3`}
+                    viewBox="0 0 100 100"
+                  >
+                    <rect x="0" y="17" rx="4" ry="4" width="200" height="30" />
+                  </ContentLoader>
+                ) : (
+                  <h1 className="text-2xl font-medium md:text-3xl">
+                    {provider?.name}
+                  </h1>
+                )}
+
                 <div className="flex items-center gap-1 text-amber-500">
                   <Star className="w-4 h-4 text-amber-500" />
                   <span className="font-sans text-xs font-medium md:text-sm">
@@ -72,28 +121,34 @@ const LojaScreen = () => {
             <h1 className="text-2xl font-medium">Serviços</h1>
             <div>
               <div className="flex flex-wrap justify-between gap-5 mt-4">
-                {array.map((item) => (
-                  <div key={item} className="w-full md:max-w-[49%]">
-                    <button className="flex justify-between w-full p-4  h-44 border border-[#f2f2f2] hover:border-[#dbdad9] shadow rounded-md duration-200 hover:shadow-md">
+                {services?.map((item) => (
+                  <div key={item._id} className="w-full md:max-w-[49%]">
+                    <button
+                      onClick={() => {
+                        setData(item);
+                        setShowModalService(true);
+                      }}
+                      className="flex justify-between w-full p-4  h-44 border border-[#f2f2f2] hover:border-[#dbdad9] shadow rounded-md duration-200 hover:shadow-md"
+                    >
                       <div className="flex flex-col items-start h-full ">
                         <h1 className="mb-3 text-xl font-medium text-secundary">
-                          Banho e tosa
+                          {item?.name}
                         </h1>
                         <div className="flex flex-col items-start justify-between h-full">
-                          <span className="text-sm font-medium text-secundary">
-                            Banho com perfumes e tosa higiênica
+                          <span className="text-sm font-medium text-start text-secundary">
+                            {item?.description}
                           </span>
                           <span className="text-base font-medium text-secundary">
-                            R$ 30,00
+                            {formatToBRL(item?.price)}
                           </span>
                         </div>
                       </div>
                       <div className="flex ">
                         <Image
-                          src="/assets/images/banho.jpg"
+                          src={`data:image/jpg;base64, ${item?.thumbnail}`}
                           alt="Picture of the author"
-                          width={142}
-                          height={142}
+                          width={170}
+                          height={170}
                           objectFit="cover"
                           className="rounded-md "
                         />
@@ -107,17 +162,13 @@ const LojaScreen = () => {
         </div>
       </div>
 
-      {true && (
+      {showModalService && data && (
         <>
-          <div className="fixed top-0 left-0 z-[80] w-full h-full bg-black bg-opacity-50"></div>
-          <ServiceCard
-            service={{
-              title: "Banho e tosa",
-              description:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-              icon: "/assets/images/banho.jpg",
-            }}
-          />
+          <div
+            onClick={() => setShowModalService(false)}
+            className="fixed top-0 left-0 z-[80] w-full h-full bg-black bg-opacity-50"
+          ></div>
+          <ServiceCard setShowModal={setShowModalService} data={data} />
         </>
       )}
     </>

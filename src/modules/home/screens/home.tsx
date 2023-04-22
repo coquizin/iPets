@@ -2,13 +2,16 @@ import Image from "next/image";
 import BestWorkers from "../components/bestWorkers";
 import { Star } from "@styled-icons/boxicons-solid";
 import { StyledDiv } from "./styles";
+import { useListService } from "@/services/services";
+import { useListProvider } from "@/services/providers";
+import { GuideDog } from "@styled-icons/foundation";
+import { formatToBRL } from "brazilian-values";
 
 export default function HomeScreen() {
-  const array = [
-    1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-  ];
+  const dataServices = useListService();
+  const dataProvider = useListProvider();
 
-  const array2 = [1, 2, 3, 4, 5, 6, 8, 9];
+  console.log(dataServices.data);
 
   return (
     <>
@@ -33,36 +36,46 @@ export default function HomeScreen() {
         <div className="flex justify-center w-full px-6">
           <div className="w-full max-w-content-wrapper-max">
             <div className="grid gap-5 mb-10 xl:grid-cols-auto-1818px md:grid-cols-auto-768px grid-cols-auto-repeat justify-items-center">
-              {array.map((item) => (
-                <div
-                  key={item}
-                  className="flex w-full duration-300 bg-white rounded-md ease-linear min-h-[130px] max-h-[140px] cursor-pointer hover:scale-[1.02] hover:shadow-[0_2px_8px_rgba(0,0,0,.4)]"
-                >
-                  <div className="flex rounded-l-md min-w-[130px] justify-center">
-                    <Image
-                      src="/assets/images/dogWalker.jpg"
-                      alt="dog walker"
-                      className="min-h-[130px] rounded-l-md"
-                      width={140}
-                      height={140}
-                      objectFit="cover"
-                    />
-                  </div>
-                  <div className="flex flex-col justify-between p-4 text-start">
-                    <div>
-                      <h3 className="text-lg font-medium">Dog Walker </h3>
-                      <p className="text-sm ">
-                        profissional que oferece o serviço de passear com seu
-                        pet.
-                      </p>
+              {dataServices?.data?.map((item, idx) => {
+                if (idx < 12) {
+                  return (
+                    <div
+                      key={item._id}
+                      className="flex w-full duration-300 bg-white rounded-md ease-linear min-h-[130px] max-h-[140px] cursor-pointer hover:scale-[1.02] hover:shadow-[0_2px_8px_rgba(0,0,0,.4)]"
+                    >
+                      <div className="flex rounded-l-md min-w-[130px] justify-center">
+                        <Image
+                          src={`data:image/jpg;base64, ${item?.thumbnail}`}
+                          alt="dog walker"
+                          className="min-h-[130px] rounded-l-md"
+                          width={140}
+                          height={140}
+                          objectFit="cover"
+                        />
+                      </div>
+                      <div className="flex flex-col justify-between p-4 text-start">
+                        <div>
+                          <h3 className="text-lg font-medium">{item.name}</h3>
+                          <p className="text-sm ">{item?.description}</p>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <span className="text-secundary">
+                              {formatToBRL(item?.price)}
+                            </span>
+                          </div>
+                          <div className="flex items-end gap-1 text-amber-500">
+                            <Star className="w-4 h-4 text-amber-500" />
+                            <span className="font-sans text-xs font-medium">
+                              ...
+                            </span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex items-end gap-1 text-amber-500">
-                      <Star className="w-4 h-4 text-amber-500" />
-                      <span className="font-sans text-xs font-medium">4.6</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                  );
+                }
+              })}
             </div>
           </div>
         </div>
@@ -76,24 +89,16 @@ export default function HomeScreen() {
             </h3>
             <span className="text-[#CCC6C6] cursor-pointer">ver mais</span>
           </div>
-          <div className="grid gap-2 grid-cols-auto-repeat justify-items-center">
-            {array2.map((item) => (
-              <BestWorkers key={item} />
-            ))}
+          <div className="grid gap-4 grid-cols-auto-repeat justify-items-center">
+            {dataProvider?.data?.map((item, idx) => {
+              if (idx < 8) {
+                return <BestWorkers key={item._id} {...item} />;
+              }
+            })}
           </div>
         </div>
-        <div className="w-full max-w-content-wrapper-max">
-          <div className="flex flex-col items-center gap-3 mb-10 md:mb-16 md:flex-row md:items-end mt-28">
-            <h3 className="text-4xl font-medium text-white">
-              Top veterinários
-            </h3>
-            <span className="text-[#CCC6C6] cursor-pointer">ver mais</span>
-          </div>
-          <div className="grid gap-2 grid-cols-auto-repeat justify-items-center">
-            {array2.map((item) => (
-              <BestWorkers key={item} />
-            ))}
-          </div>
+        <div className="flex justify-center w-full mt-20 max-w-content-wrapper-max">
+          <GuideDog className="text-red-600 w-60 h-60" />
         </div>
       </div>
     </>

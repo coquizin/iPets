@@ -7,7 +7,18 @@ import {
 } from "@/utils/helpers/Masks";
 import { formatToCPF, formatToGenericPhone } from "brazilian-values";
 import { useForm } from "react-hook-form";
-import { Cliente } from "../../types";
+import { useUpdateConsumer } from "@/services/consumers";
+import { keyListConsumer } from "@/services/consumers/keys";
+import { queryClient } from "@/libs/react-query";
+import { Consumer } from "@/entities/Consumer/consumer";
+import { useRouter } from "next/router";
+
+type FormValues = {
+  name: string;
+  phone: string;
+  cpf: string;
+  birthDate: string;
+};
 
 export default function DadosClientes() {
   const {
@@ -16,18 +27,41 @@ export default function DadosClientes() {
     setValue,
     getValues,
     formState: { errors },
-  } = useForm<Cliente>({
-    defaultValues: { email: "", password: "", name: "", phone: "" },
+  } = useForm<FormValues>({
+    defaultValues: { name: "", phone: "", cpf: "", birthDate: "" },
   });
 
+  const router = useRouter();
   const orderId = useCreateAccountScreen((state) => state.data.orderId);
   const setCheckoutOrderId = useCreateAccountScreen(
     (state) => state.setCheckoutOrderId
   );
 
-  const onSubmit = (data: Cliente) => {
-    setCheckoutOrderId((orderId || 0) + 1);
-    console.log(data);
+  const { mutate, isLoading } = useUpdateConsumer({
+    onSuccess: async (res) => {
+      await queryClient.invalidateQueries(keyListConsumer());
+      setCheckoutOrderId((orderId || 0) + 1);
+      window.scrollTo(0, 0);
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
+
+  const onSubmit = (data: Consumer) => {
+    const id = router.query.id as string;
+    const ageCorrect = data.birthDate?.split("/");
+    const date =
+      ageCorrect && `${ageCorrect[2]}-${ageCorrect[1]}-${ageCorrect[0]}`;
+    data = {
+      cpf: data?.cpf?.replace(/\D/g, ""),
+      phone: data?.phone?.replace(/\D/g, ""),
+      birthDate: date,
+      name: data?.name,
+      _id: id,
+    };
+
+    mutate(data);
   };
 
   return (
@@ -125,14 +159,11 @@ export default function DadosClientes() {
       </div>
       <div className="flex justify-end">
         <button
-          type="button"
-          className=" max-w-[115px] w-full flex items-center justify-center h-[40px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-medium "
-          onClick={() => {
-            setCheckoutOrderId((orderId || 0) + 1);
-            window.scrollTo(0, 0);
-          }}
+          type="submit"
+          disabled={isLoading}
+          className=" max-w-[115px] w-full flex items-center justify-center h-[40px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Continuar
+          {isLoading ? "Carregando" : "Continuar"}
         </button>
       </div>
     </form>
