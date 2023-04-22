@@ -47,7 +47,7 @@ const ProfileScreen = () => {
           </div>
         </div>
         <div className="flex justify-end md:items-start">
-          <button className="px-4 py-2 font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-500/75">
+          <button className="px-4 py-2 font-medium bg-yellow-500 border-2 rounded-md border-secundary hover:bg-yellow-500/75">
             <span>Editar</span>
           </button>
         </div>
@@ -57,7 +57,7 @@ const ProfileScreen = () => {
           <h1 className="text-3xl font-medium md:text-4xl text-secundary">
             Pets
           </h1>
-          <button className="px-4 py-2 font-medium duration-300 border-2 rounded-md border-secundary text-secundary hover:bg-yellow-400">
+          <button className="px-4 py-2 font-medium duration-300 bg-yellow-500 border-2 rounded-md border-secundary hover:bg-yellow-400">
             <span>Adicionar</span>
           </button>
         </div>
@@ -99,7 +99,7 @@ const ProfileScreen = () => {
             </div>
           </div>
           <div className="flex flex-row items-start justify-center gap-2 mt-5">
-            <button className="flex items-center gap-2 px-4 py-2 font-medium text-white bg-yellow-500 rounded-md max-h-fit hover:bg-yellow-500/75">
+            <button className="flex items-center gap-2 px-4 py-2 font-medium bg-yellow-500 border-2 rounded-md border-secundary max-h-fit hover:bg-yellow-500/75">
               <span>Editar</span>
             </button>
             <button className="flex items-center gap-2 px-4 py-2 font-medium text-white bg-red-500 rounded-md hover:bg-red-500/75">
@@ -145,7 +145,7 @@ const ProfileScreen = () => {
             </div>
           </div>
           <div className="flex flex-row items-start justify-center gap-2 mt-5">
-            <button className="flex items-center gap-2 px-4 py-2 font-medium text-white bg-yellow-500 rounded-md max-h-fit hover:bg-yellow-500/75">
+            <button className="flex items-center gap-2 px-4 py-2 font-medium bg-yellow-500 border-2 rounded-md border-secundary max-h-fit hover:bg-yellow-500/75">
               <span>Editar</span>
             </button>
             <button className="flex items-center gap-2 px-4 py-2 font-medium text-white bg-red-500 rounded-md hover:bg-red-500/75">

@@ -1,12 +1,16 @@
 import Input from "@/components/input/input";
 import { Address } from "@/entities/Address/address";
+import { queryClient } from "@/libs/react-query";
 import { useGetAddressByCep } from "@/services/address";
+import { useUpdateConsumer } from "@/services/consumers";
+import { keyListConsumer } from "@/services/consumers/keys";
 import { useCreateAccountScreen } from "@/stores/useCreateAccount";
 import {
   formatToCEP,
   formatToNumber,
   formatToOnlyLetters,
 } from "@/utils/helpers/Masks";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
 export default function DadosEndereco() {
@@ -21,17 +25,31 @@ export default function DadosEndereco() {
     defaultValues: {},
   });
 
+  const router = useRouter();
   const orderId = useCreateAccountScreen((state) => state.data.orderId);
   const setCheckoutOrderId = useCreateAccountScreen(
     (state) => state.setCheckoutOrderId
   );
 
+  const { mutate, isLoading } = useUpdateConsumer({
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(keyListConsumer());
+      setCheckoutOrderId((orderId || 0) + 1);
+      window.scrollTo(0, 0);
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
+
   const onSubmit = (data: Address) => {
-    setCheckoutOrderId((orderId || 0) + 1);
-    window.scrollTo(0, 0);
+    mutate({
+      address: { ...data },
+      _id: router.query.id as string,
+    });
   };
 
-  useGetAddressByCep(formatToNumber(watch("zip")), {
+  useGetAddressByCep(formatToNumber(watch("postcode")), {
     onSuccess: (data) => {
       setValue("street", data?.logradouro);
       setValue("district", data?.bairro);
@@ -40,7 +58,7 @@ export default function DadosEndereco() {
       clearErrors(["street", "district", "city", "uf"]);
     },
     refetchOnMount: true,
-    enabled: Boolean(formatToNumber(watch("zip")).length === 8),
+    enabled: Boolean(formatToNumber(watch("postcode")).length === 8),
   });
 
   return (
@@ -50,35 +68,17 @@ export default function DadosEndereco() {
         <div className="rounded-[3px] p-5 space-y-4 bg-[#F5F5F5]">
           <div className="flex flex-col gap-1 max-w-[500px] w-full">
             <Input
-              label="País"
-              name="country"
-              type="text"
-              id="country"
-              errors={errors.country}
-              register={{
-                ...register("country", {
-                  required: "País é obrigatório",
-                  onChange: (e) => {
-                    setValue("country", formatToOnlyLetters(e.target.value));
-                  },
-                }),
-              }}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1 max-w-[500px] w-full">
-            <Input
               label="CEP"
-              name="zip"
+              name="postcode"
               type="text"
-              id="zip"
+              id="postcode"
               placeholder="00000-000"
-              errors={errors.zip}
+              errors={errors.postcode}
               register={{
-                ...register("zip", {
+                ...register("postcode", {
                   required: "CEP é obrigatório",
                   onChange: (e) => {
-                    setValue("zip", formatToCEP(e.target.value));
+                    setValue("postcode", formatToCEP(e.target.value));
                   },
                 }),
               }}
@@ -199,7 +199,7 @@ export default function DadosEndereco() {
           type="submit"
           className=" max-w-[115px] w-full flex items-center justify-center h-[40px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-medium "
         >
-          Confirmar
+          {isLoading ? "Carregando" : "Confirmar"}
         </button>
       </div>
     </form>

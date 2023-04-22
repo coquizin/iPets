@@ -1,9 +1,13 @@
 import { AxiosResponse, AxiosError } from "axios";
 
 type RawError = {
-  code: number;
-  message: string;
-  errors: string[];
+  detail: [
+    {
+      loc: [string, 0];
+      msg: string;
+      type: string;
+    }
+  ];
 };
 
 export type APIError = AxiosError<RawError>;

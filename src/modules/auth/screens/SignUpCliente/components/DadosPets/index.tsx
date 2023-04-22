@@ -1,5 +1,8 @@
 import Input from "@/components/input/input";
 import { Pets } from "@/entities/Pets/pets";
+import { queryClient } from "@/libs/react-query";
+import { useUpdateConsumer } from "@/services/consumers";
+import { keyListConsumer } from "@/services/consumers/keys";
 import { useCreateAccountScreen } from "@/stores/useCreateAccount";
 import { formatToNumber, formatToOnlyLetters } from "@/utils/helpers/Masks";
 import { useRouter } from "next/router";
@@ -22,9 +25,23 @@ export default function DadosPets() {
     (state) => state.setCheckoutOrderId
   );
 
+  const { mutate, isLoading } = useUpdateConsumer({
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(keyListConsumer());
+      setCheckoutOrderId((orderId || 0) + 1);
+      window.scrollTo(0, 0);
+      router.replace("/");
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
+
   const onSubmit = (data: Pets) => {
-    setCheckoutOrderId((orderId || 0) + 1);
-    console.log(data);
+    mutate({
+      pets: [{ ...data }],
+      _id: router.query.id as string,
+    });
   };
 
   return (
@@ -56,12 +73,12 @@ export default function DadosPets() {
               name="type"
               type="text"
               id="type"
-              errors={errors.type}
+              errors={errors.species}
               register={{
-                ...register("type", {
+                ...register("species", {
                   required: "Espécie é obrigatório",
                   onChange: (e) => {
-                    setValue("type", formatToOnlyLetters(e.target.value));
+                    setValue("species", formatToOnlyLetters(e.target.value));
                   },
                 }),
               }}
@@ -74,12 +91,12 @@ export default function DadosPets() {
               name="raça"
               type="text"
               id="raça"
-              errors={errors.raça}
+              errors={errors.race}
               register={{
-                ...register("raça", {
+                ...register("race", {
                   required: "Raça é obrigatório",
                   onChange: (e) => {
-                    setValue("raça", formatToOnlyLetters(e.target.value));
+                    setValue("race", formatToOnlyLetters(e.target.value));
                   },
                 }),
               }}
@@ -115,9 +132,9 @@ export default function DadosPets() {
               name="complement"
               type="text"
               id="complement"
-              errors={errors.complement}
+              errors={errors.description}
               register={{
-                ...register("complement"),
+                ...register("description"),
               }}
             />
           </div>
@@ -135,13 +152,10 @@ export default function DadosPets() {
           Voltar
         </button>
         <button
-          type="button"
+          type="submit"
           className=" max-w-[115px] w-full flex items-center justify-center h-[40px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-medium "
-          onClick={() => {
-            router.replace("/");
-          }}
         >
-          Confirmar
+          {isLoading ? "Carregando" : "Confirmar"}
         </button>
       </div>
     </form>

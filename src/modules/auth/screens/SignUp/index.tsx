@@ -2,9 +2,13 @@ import Input from "@/components/input/input";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { SignInProps } from "./types";
 import { useRouter } from "next/router";
 import { useAuthScreen } from "@/stores/useAuth";
+import { useCreateConsumer } from "@/services/consumers";
+import { queryClient } from "@/libs/react-query";
+import { keyListConsumer } from "@/services/consumers/keys";
+import { Consumer } from "@/entities/Consumer/consumer";
+import { CookieKey, setCookie } from "@/utils/cookies";
 
 export default function SignUpScreen() {
   const router = useRouter();
@@ -12,16 +16,33 @@ export default function SignUpScreen() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInProps>({
+  } = useForm<Consumer>({
     defaultValues: { email: "", password: "" },
   });
 
   const setAuthScreen = useAuthScreen((state) => state.setAuthScreen);
 
-  const onSubmit = (data: SignInProps) => {
-    router.push("criar-conta/cliente");
-    setAuthScreen(true, "register");
-    console.log(data);
+  const { mutate, isLoading } = useCreateConsumer({
+    onSuccess: async (res) => {
+      // await queryClient.invalidateQueries(keyCurrentCostumer());
+      await queryClient.invalidateQueries(keyListConsumer());
+      const data = JSON.parse(res as string);
+      setCookie(CookieKey.UserId, data._id.$oid);
+      setCookie(CookieKey.JwtAuthToken, data._id.$oid);
+      router.push(`criar-conta/cliente/${data._id.$oid}`);
+      setAuthScreen(true, "register");
+    },
+    onError: (error: any) => {
+      if (error?.response) {
+        console.log(error);
+      } else {
+        console.log(error);
+      }
+    },
+  });
+
+  const onSubmit = (data: Consumer) => {
+    mutate(data);
   };
 
   return (
@@ -86,10 +107,11 @@ export default function SignUpScreen() {
 
             <div className="flex flex-col items-center justify-center w-full gap-5">
               <button
+                disabled={isLoading}
                 className="md:max-w-[400px] max-w-[300px] w-full flex items-center justify-center h-[62px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-semibold uppercase"
                 type="submit"
               >
-                Criar
+                {isLoading ? "Criando..." : "Criar"}
               </button>
               <button
                 type="button"

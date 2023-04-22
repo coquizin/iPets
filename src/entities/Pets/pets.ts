@@ -1,10 +1,9 @@
 import { Meta } from "@entities/Meta";
 
 export interface Pets extends Meta {
-  id: number;
   name: string;
-  type: string;
-  raça: string;
+  species: string;
+  race: string;
   age: string;
-  complement: string;
+  description: string;
 }
