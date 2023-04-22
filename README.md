@@ -29,10 +29,10 @@ Leia o [Guia de Instalação](https://yarnpkg.com/en/docs/install) no site ofici
 
 
 ## Integrantes
-Projeto desenvolvido pelos Devs:
+Projeto desenvolvido pelos Dev:
 
 - [Cauli Vilela Ferreira](https://github.com/coquizin)
-- 
+
 
 
 
