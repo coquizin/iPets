@@ -60,7 +60,7 @@ export default function DadosPrestador() {
       <div>
         <h1 className="font-medium mb-2 text-[1.25rem]">Dados do prestador</h1>
         <div className="rounded-[3px] p-5 space-y-4 bg-[#F5F5F5]">
-          <div className="flex flex-col gap-1 max-w-[500px] min-w-[300px] w-full">
+          <div className="flex flex-col gap-1 max-w-[500px]  w-full">
             <Input
               label="Email"
               name="email"
@@ -74,7 +74,7 @@ export default function DadosPrestador() {
           </div>
 
           <div className="max-w-[500px] w-full">
-            <div className="flex flex-col !font-sans gap-1 mb-2 max-w-[500px] min-w-[300px] w-full">
+            <div className="flex flex-col  gap-1 mb-2 max-w-[500px]  w-full">
               <Input
                 label="Senha"
                 name="password"
