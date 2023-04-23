@@ -64,7 +64,7 @@ export const useDeleteRequest = (
   return useMutation<RequestModel, AxiosError, RequestModel>(
     ({ _id }) =>
       api
-        .delete<RawResponse<RequestModel>>(`/api/user_exchanges/${_id}`)
+        .delete<RawResponse<RequestModel>>(`/requests/${_id}`)
         .then(parseResponseData),
     options
   );

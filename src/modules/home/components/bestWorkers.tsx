@@ -20,9 +20,9 @@ const BestWorkers = (data: Provider) => {
           </div>
           <div className="flex flex-col gap-1 text-start">
             <p className="text-lg font-medium text-white">
-              {data?.name.split(" ")[0]}
+              {data?.name?.split(" ")[0]}
             </p>
-            <span className="text-[#7B9E89]">@{data?.name.split(" ")[0]}</span>
+            <span className="text-[#7B9E89]">@{data?.name?.split(" ")[0]}</span>
             <span className="text-[#CCC6C6]">543 serviços</span>
           </div>
           <div className="flex items-center ">

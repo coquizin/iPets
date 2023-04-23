@@ -6,10 +6,26 @@ import { useListService } from "@/services/services";
 import { useListProvider } from "@/services/providers";
 import { GuideDog } from "@styled-icons/foundation";
 import { formatToBRL } from "brazilian-values";
+import ServiceCard from "@/components/serviceCard";
+import { useState } from "react";
+import { ServiceModel } from "@/entities/ServiceModel";
+import { useCreateId } from "@/stores/useId";
 
 export default function HomeScreen() {
   const dataServices = useListService();
   const dataProvider = useListProvider();
+  const [showModalService, setShowModalService] = useState(false);
+  const [serviceData, setServiceData] = useState<ServiceModel>();
+  const consumerId = useCreateId((state) => state.data.id);
+
+  const openServiceModal = (data: ServiceModel) => {
+    if (!consumerId) {
+      alert("Você precisa estar logado para solicitar um serviço");
+      return;
+    }
+    setServiceData(data);
+    setShowModalService(true);
+  };
 
   return (
     <>
@@ -39,17 +55,26 @@ export default function HomeScreen() {
                   return (
                     <div
                       key={item._id}
+                      onClick={() => {
+                        openServiceModal(item);
+                      }}
                       className="flex w-full duration-300 bg-white rounded-md ease-linear min-h-[130px] max-h-[140px] cursor-pointer hover:scale-[1.02] hover:shadow-[0_2px_8px_rgba(0,0,0,.4)]"
                     >
                       <div className="flex rounded-l-md min-w-[130px] justify-center">
-                        <Image
-                          src={`data:image/jpg;base64, ${item?.thumbnail}`}
-                          alt="dog walker"
-                          className="min-h-[130px] rounded-l-md"
-                          width={140}
-                          height={140}
-                          objectFit="cover"
-                        />
+                        {item?.thumbnail ? (
+                          <Image
+                            src={`data:image/jpg;base64, ${item?.thumbnail}`}
+                            alt="dog walker"
+                            className="min-h-[130px] rounded-l-md"
+                            width={140}
+                            height={140}
+                            objectFit="cover"
+                          />
+                        ) : (
+                          <div className="flex items-center justify-center w-full h-full">
+                            <div className="min-w-full min-h-full bg-gray-400 opacity-50" />
+                          </div>
+                        )}
                       </div>
                       <div className="flex flex-col justify-between p-4 text-start">
                         <div>
@@ -99,6 +124,16 @@ export default function HomeScreen() {
           <GuideDog className="text-yellow-600 w-60 h-60" />
         </div>
       </div>
+
+      {showModalService && serviceData && (
+        <>
+          <div
+            onClick={() => setShowModalService(false)}
+            className="fixed top-0 left-0 z-[80] w-full h-full bg-black bg-opacity-50"
+          ></div>
+          <ServiceCard setShowModal={setShowModalService} data={serviceData} />
+        </>
+      )}
     </>
   );
 }

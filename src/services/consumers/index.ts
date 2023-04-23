@@ -73,7 +73,7 @@ export const useDeleteConsumer = (
   return useMutation<Consumer, AxiosError, Consumer>(
     ({ _id }) =>
       api
-        .delete<RawResponse<Consumer>>(`/api/user_exchanges/${_id}`)
+        .delete<RawResponse<Consumer>>(`/consumers/${_id}`)
         .then(parseResponseData),
     options
   );

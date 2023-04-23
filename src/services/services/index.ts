@@ -64,7 +64,7 @@ export const useDeleteService = (
   return useMutation<ServiceModel, AxiosError, ServiceModel>(
     ({ _id }) =>
       api
-        .delete<RawResponse<ServiceModel>>(`/api/user_exchanges/${_id}`)
+        .delete<RawResponse<ServiceModel>>(`/services/${_id}`)
         .then(parseResponseData),
     options
   );

@@ -32,13 +32,20 @@ export const useGetProvider = (id: string) => {
 export const useCreateProvider = (
   options?: UseMutationOptions<Provider, AxiosError, Provider>
 ) => {
-  return useMutation<Provider, AxiosError, Provider>(
-    (data) =>
-      api
-        .post<RawResponse<Provider>>(`/providers/`, data)
-        .then(parseResponseData),
-    options
-  );
+  // return useMutation<Provider, AxiosError, Provider>(
+  //   (data) =>
+  //     api
+  //       .post<RawResponse<Provider>>(`/providers/`, data)
+  //       .then(parseResponseData),
+  //   options
+  // );
+
+  const create = async (data: Provider) => {
+    const result = await api.post<RawResponse<Provider>>(`/providers/`, data);
+    return parseResponseData(result);
+  };
+
+  return useMutation(create, options);
 };
 
 export const useUpdateProvider = (
@@ -64,7 +71,7 @@ export const useDeleteProvider = (
   return useMutation<Provider, AxiosError, Provider>(
     ({ _id }) =>
       api
-        .delete<RawResponse<Provider>>(`/api/user_exchanges/${_id}`)
+        .delete<RawResponse<Provider>>(`/providers/${_id}`)
         .then(parseResponseData),
     options
   );
