@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useCreateRequest } from "@/services/requests";
 import { keyListRequest } from "@/services/requests/keys";
 import { queryClient } from "@/libs/react-query";
+import { useCreateId } from "@/stores/useId";
 
 type Props = {
   data: ServiceModel;
@@ -21,6 +22,8 @@ const ServiceCard = ({ setShowModal, data }: Props) => {
   } = useForm<RequestModel>({
     defaultValues: {},
   });
+
+  const consumerId = useCreateId((state) => state.data.id);
 
   const { mutate, isLoading } = useCreateRequest({
     onSuccess: async (res) => {
@@ -44,7 +47,7 @@ const ServiceCard = ({ setShowModal, data }: Props) => {
     const request = {
       serviceId: data._id,
       status: "Pendente",
-      consumerId: "6443511bd40593420fc017ad",
+      consumerId: consumerId,
       date: dataAtual,
     };
 
@@ -63,14 +66,16 @@ const ServiceCard = ({ setShowModal, data }: Props) => {
         </button>
       </div>
       <div className="relative flex justify-center w-full mb-5">
-        <Image
-          src={`data:image/jpg;base64, ${data?.thumbnail}`}
-          alt={"serviço icon"}
-          width={268}
-          height={268}
-          objectFit="cover"
-          className="rounded-md min-w-[468px] min-h-[468px]"
-        />
+        {data?.thumbnail && (
+          <Image
+            src={`data:image/jpg;base64, ${data?.thumbnail}`}
+            alt={"serviço icon"}
+            width={268}
+            height={268}
+            objectFit="cover"
+            className="rounded-md min-w-[468px] min-h-[468px]"
+          />
+        )}
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col items-center ">

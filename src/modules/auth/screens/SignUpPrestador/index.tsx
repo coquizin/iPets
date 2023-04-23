@@ -2,22 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import Stepper from "@/components/Stepper";
 import { useCreateAccountScreen } from "@/stores/useCreateAccount";
-import DadosClientes from "./components/DadosClientes";
+import DadosPrestador from "./components/DadosPrestador";
 import { useMemo } from "react";
 import DadosEndereco from "./components/Endereco";
-import DadosPets from "./components/DadosPets";
+import DadosBank from "./components/DadosBank";
 
-export default function SignUpClienteScreen() {
+export default function SignUpPrestadorScreen() {
   const orderId = useCreateAccountScreen((state) => state.data.orderId);
 
   const setOrderScreen = useMemo(() => {
     switch (orderId) {
       case 0:
-        return <DadosClientes />;
+        return <DadosPrestador />;
       case 1:
         return <DadosEndereco />;
       case 2:
-        return <DadosPets />;
+        return <DadosBank />;
       default:
         return (
           <div className="flex items-center justify-center w-full h-full">
@@ -30,7 +30,7 @@ export default function SignUpClienteScreen() {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen h-full px-5 bg-[#E5E5E5]">
       <div className="w-screen mb-5 cursor-pointer">
-        <Link href={"/provider"} passHref>
+        <Link href={"/"} passHref>
           <a>
             <div className="flex items-center justify-center mt-4 text-xl">
               <Image
@@ -48,9 +48,9 @@ export default function SignUpClienteScreen() {
         <Stepper
           status={orderId}
           options={[
-            "Dados do cliente",
-            "Endereço do cliente",
-            "Dados dos pets",
+            "Dados do prestador",
+            "Endereço do prestador",
+            "Dados do banco",
           ]}
         >
           {setOrderScreen}

@@ -1,14 +1,23 @@
 import Input from "@/components/input/input";
-import { Pets } from "@/entities/Pets/pets";
+import { BankAccount } from "@/entities/BankAccount/bankaccount";
+import { Provider } from "@/entities/Provider/provider";
 import { queryClient } from "@/libs/react-query";
 import { useUpdateConsumer } from "@/services/consumers";
 import { keyListConsumer } from "@/services/consumers/keys";
+import { useUpdateProvider } from "@/services/providers";
 import { useCreateAccountScreen } from "@/stores/useCreateAccount";
-import { formatToNumber, formatToOnlyLetters } from "@/utils/helpers/Masks";
+import { useCreateId } from "@/stores/useId";
+import {
+  formatToAccount,
+  formatToAgency,
+  formatToDigit,
+  formatToNumber,
+  formatToOnlyLetters,
+} from "@/utils/helpers/Masks";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-export default function DadosPets() {
+export default function DadosBank() {
   const router = useRouter();
 
   const {
@@ -16,7 +25,7 @@ export default function DadosPets() {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<Pets>({
+  } = useForm<BankAccount>({
     defaultValues: {},
   });
 
@@ -24,43 +33,65 @@ export default function DadosPets() {
   const setCheckoutOrderId = useCreateAccountScreen(
     (state) => state.setCheckoutOrderId
   );
+  const idProvider = useCreateId((state) => state.data.id);
 
-  const { mutate, isLoading } = useUpdateConsumer({
+  const { mutate, isLoading } = useUpdateProvider({
     onSuccess: async () => {
       await queryClient.invalidateQueries(keyListConsumer());
       setCheckoutOrderId((orderId || 0) + 1);
       window.scrollTo(0, 0);
-      router.replace("/");
+      router.replace("/prestador");
     },
     onError: () => {
       console.log("error");
     },
   });
 
-  const onSubmit = (data: Pets) => {
+  const onSubmit = (data: BankAccount) => {
     mutate({
-      pets: [{ ...data }],
-      _id: router.query.id as string,
+      bankAccount: { ...data },
+      _id: idProvider,
     });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <h1 className="font-medium mb-2 text-[1.25rem]">Dados do Pet</h1>
+        <h1 className="font-medium mb-2 text-[1.25rem]">
+          Dados da conta bancária
+        </h1>
         <div className="rounded-[3px] p-5 space-y-4 bg-[#F5F5F5]">
           <div className="flex flex-col gap-1 max-w-[500px] w-full">
             <Input
-              label="Nome"
-              name="name"
+              label="Agência"
+              name="agency"
               type="text"
               id="name"
-              errors={errors.name}
+              placeholder="0000"
+              errors={errors.agency}
               register={{
-                ...register("name", {
-                  required: "Nome é obrigatório",
+                ...register("agency", {
+                  required: "Agência é obrigatório",
                   onChange: (e) => {
-                    setValue("name", formatToOnlyLetters(e.target.value));
+                    setValue("agency", formatToAgency(e.target.value));
+                  },
+                }),
+              }}
+            />
+          </div>
+          <div className="flex flex-col gap-1 max-w-[500px] w-full">
+            <Input
+              label="Digito da agência"
+              name="digit"
+              type="text"
+              id="digit"
+              placeholder="0"
+              errors={errors.digit}
+              register={{
+                ...register("digit", {
+                  required: "Digito é obrigatório",
+                  onChange: (e) => {
+                    setValue("digit", formatToDigit(e.target.value));
                   },
                 }),
               }}
@@ -69,72 +100,19 @@ export default function DadosPets() {
 
           <div className="flex flex-col gap-1 max-w-[500px] w-full">
             <Input
-              label="Espécie"
-              name="type"
+              label="Conta bancária"
+              name="accountNumber"
               type="text"
-              id="type"
-              errors={errors.species}
+              id="accountNumber"
+              placeholder="0000000-0"
+              errors={errors.accountNumber}
               register={{
-                ...register("species", {
-                  required: "Espécie é obrigatório",
+                ...register("accountNumber", {
+                  required: "Conta Bancária é obrigatório",
                   onChange: (e) => {
-                    setValue("species", formatToOnlyLetters(e.target.value));
+                    setValue("accountNumber", formatToAccount(e.target.value));
                   },
                 }),
-              }}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1 max-w-[500px] w-full">
-            <Input
-              label="Raça"
-              name="raça"
-              type="text"
-              id="raça"
-              errors={errors.race}
-              register={{
-                ...register("race", {
-                  required: "Raça é obrigatório",
-                  onChange: (e) => {
-                    setValue("race", formatToOnlyLetters(e.target.value));
-                  },
-                }),
-              }}
-            />
-          </div>
-
-          <div className="flex items-end gap-2">
-            <div className="flex flex-col gap-1 max-w-[150px] w-full">
-              <Input
-                label="Idade"
-                name="number"
-                type="text"
-                id="number"
-                errors={errors.age}
-                register={{
-                  ...register("age", {
-                    required: "Número é obrigatório",
-                    onChange: (e) => {
-                      setValue("age", formatToNumber(e.target.value));
-                    },
-                  }),
-                }}
-              />
-            </div>
-            <span className="mb-6 text-base font-medium text-secundary">
-              Anos
-            </span>
-          </div>
-
-          <div className="flex flex-col gap-1 max-w-[500px] w-full">
-            <Input
-              label="Complemento"
-              name="complement"
-              type="text"
-              id="complement"
-              errors={errors.description}
-              register={{
-                ...register("description"),
               }}
             />
           </div>

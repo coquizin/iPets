@@ -9,7 +9,6 @@ import { useListService } from "@/services/services";
 import { formatToBRL } from "brazilian-values";
 import ContentLoader from "react-content-loader";
 import { ServiceModel } from "@/entities/ServiceModel";
-import { useListRequest } from "@/services/requests";
 
 const LojaScreen = () => {
   const [isFavorite, setIsFavorite] = useState(false);
