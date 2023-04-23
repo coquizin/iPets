@@ -125,7 +125,7 @@ export default function HomeProviderScreen() {
                 setShowAddService(true);
                 setServiceUpdate(false);
               }}
-              className="w-40 h-10 text-black border rounded-md border-secundary bg-primary"
+              className="w-40 text-black border rounded-md min-h-10 border-secundary bg-primary"
             >
               Adicionar serviço
             </button>
