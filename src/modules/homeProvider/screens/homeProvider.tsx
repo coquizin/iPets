@@ -16,6 +16,17 @@ import { useForm } from "react-hook-form";
 import { keyListService } from "@/services/services/keys";
 
 export default function HomeProviderScreen() {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    reset,
+    formState: { errors },
+  } = useForm<ServiceModel>({
+    defaultValues: { name: "", description: "", price: 0, _id: "" },
+  });
+
   const providerId = useCreateId((state) => state.data.id);
   const services = useListService();
   const servicesFiltered = services.data?.filter(
@@ -28,7 +39,6 @@ export default function HomeProviderScreen() {
     servicesFiltered?.map((service) => service._id).includes(request.serviceId)
   );
 
-  //64453694674e899c2d32b107
   const sortedRequests = requestsFiltered?.sort((a, b) => {
     const statusOrder = ["Pendente", "Aceito", "Recusado"];
     return statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status);
@@ -69,17 +79,6 @@ export default function HomeProviderScreen() {
         console.log("Deletado com sucesso");
       },
     });
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    getValues,
-    reset,
-    formState: { errors },
-  } = useForm<ServiceModel>({
-    defaultValues: { name: "", description: "", price: 0, _id: "" },
-  });
 
   const editService = (service: ServiceModel) => {
     setValue("name", service.name);
@@ -264,7 +263,10 @@ export default function HomeProviderScreen() {
       {showAddService && (
         <>
           <div
-            onClick={() => setShowAddService(false)}
+            onClick={() => {
+              setShowAddService(false);
+              reset();
+            }}
             className="fixed inset-0 z-[80] flex items-center justify-center bg-black bg-opacity-50"
           ></div>
 
@@ -303,7 +305,10 @@ export default function HomeProviderScreen() {
               <div className="flex items-center justify-end w-full gap-2 mt-4">
                 <button
                   type="button"
-                  onClick={() => setShowAddService(false)}
+                  onClick={() => {
+                    setShowAddService(false);
+                    reset();
+                  }}
                   className="px-4 py-2 text-white bg-red-500 rounded-md"
                 >
                   Cancelar
