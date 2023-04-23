@@ -67,7 +67,7 @@ export default function LoginPrestadorScreen() {
         </div>
         <div className="flex flex-col items-center w-full gap-1">
           <h1 className="text-3xl font-semibold md:text-4xl font-Jost text-secundary">
-            Bem vindo ao iPets pretador.
+            Bem vindo ao iPets prestador.
           </h1>
           <p className="text-sm md:text-base">
             não possui uma conta?{" "}
