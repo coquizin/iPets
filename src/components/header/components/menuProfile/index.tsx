@@ -76,10 +76,10 @@ const MenuProfile = ({
               <span className="text-sm font-medium">Meu perfil</span>
             </a>
           </Link>
-          <Link href={"/historico"} passHref>
+          <Link href={"/meus-pedidos"} passHref>
             <a className="flex items-center gap-2 p-4 cursor-pointer hover:bg-slate-200">
               <History size={20} className="text-secundary" />
-              <span className="text-sm font-medium">Histórico</span>
+              <span className="text-sm font-medium">Meus pedidos</span>
             </a>
           </Link>
           <Link href={"/carteira"} passHref>

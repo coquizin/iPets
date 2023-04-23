@@ -16,7 +16,7 @@ export const useListRequest = () => {
   );
 };
 
-export const useGetRequest = (id: number) => {
+export const useGetRequest = (id: string) => {
   return useQuery(
     keyGetRequest(id),
     () =>

@@ -15,20 +15,20 @@ const SignUp = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const serverCookies = context.req.headers.cookie ?? ``;
-  const token = readCookie(CookieKey.JwtAuthToken, serverCookies);
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const serverCookies = context.req.headers.cookie ?? ``;
+//   const token = readCookie(CookieKey.JwtAuthToken, serverCookies);
 
-  if (token && token.length > 0) {
-    return {
-      redirect: {
-        destination: ROUTES.PRIVATE.ROOT(),
-        permanent: false,
-      },
-    };
-  }
+//   if (token && token.length > 0) {
+//     return {
+//       redirect: {
+//         destination: ROUTES.PRIVATE.ROOT(),
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return { props: {} };
-};
+//   return { props: {} };
+// };
 
 export default SignUp;
