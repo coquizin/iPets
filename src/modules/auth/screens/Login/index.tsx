@@ -129,7 +129,7 @@ export default function LoginScreen() {
 
             <div className="flex flex-col items-center justify-center w-full gap-5">
               <button
-                className="md:max-w-[400px] max-w-[300px] w-full flex items-center justify-center h-[62px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-semibold uppercase"
+                className="md:max-w-[400px] max-w-[300px] w-full flex items-center justify-center h-[62px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-black border border-secundary  text-lg font-semibold uppercase"
                 type="submit"
               >
                 Entrar
