@@ -198,7 +198,10 @@ export default function CarteiraScreen() {
                   </div>
                   <div>
                     <span className="text-xl font-medium opacity-80">
-                      {formatToBRL(54.8)}
+                      {formatToBRL(
+                        services.data?.find((s) => s._id === item.serviceId)
+                          ?.price as number
+                      )}
                     </span>
                   </div>
                 </div>
@@ -206,7 +209,7 @@ export default function CarteiraScreen() {
             ))}
           </div>
           <div className="flex justify-center w-full">
-            <Link href={"/historico"} passHref>
+            <Link href={"/meus-pedidos"} passHref>
               <a className="flex items-center justify-center mt-10 px-4 py-2 text-[1.1rem] font-medium duration-200 rounded-md border-2 border-[#d95d39] text-[#d95d39]">
                 Ver mais
               </a>

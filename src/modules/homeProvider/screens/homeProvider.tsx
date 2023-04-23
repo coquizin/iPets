@@ -186,6 +186,7 @@ export default function HomeProviderScreen() {
               <thead>
                 <tr>
                   <th className="px-4 py-2">Pedido Id</th>
+                  <th className="px-4 py-2">Serviço</th>
                   <th className="px-4 py-2">Data</th>
                   <th className="px-4 py-2">Status</th>
                   <th className="px-4 py-2">Ações</th>
@@ -196,6 +197,12 @@ export default function HomeProviderScreen() {
                   <tr className="w-full" key={request._id}>
                     <td className="px-4 py-2">
                       {(request?._id as string).slice(-5)}
+                    </td>
+                    <td className="px-4 py-2">
+                      {
+                        services.data?.find((s) => s._id === request.serviceId)
+                          ?.name
+                      }
                     </td>
                     <td className="px-4 py-2 text-ellipsis">
                       {formatToDateTime(new Date(request?.date))}
