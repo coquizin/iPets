@@ -41,10 +41,7 @@ export default function HomeScreen() {
             Escolha a opção que deseja
           </h1>
           <span className="md:text-lg">
-            Não encontrou o que queria?{" "}
-            <a className="text-[#D95D39]" href="">
-              clique aqui.
-            </a>
+            Não encontrou o que queria? <a href="">clique aqui.</a>
           </span>
         </div>
         <div className="flex justify-center w-full px-6">
@@ -78,7 +75,7 @@ export default function HomeScreen() {
                       </div>
                       <div className="flex flex-col justify-between p-4 text-start">
                         <div>
-                          <h3 className="text-lg font-medium">{item.name}</h3>
+                          <p className="text-lg font-medium">{item.name}</p>
                           <p className="text-sm ">{item?.description}</p>
                         </div>
                         <div className="flex items-center justify-between">
@@ -107,9 +104,7 @@ export default function HomeScreen() {
       <div className="bg-[#0E1428] flex flex-col items-center pb-32 px-6">
         <div className="w-full max-w-content-wrapper-max">
           <div className="flex flex-col items-center gap-3 mb-10 md:mb-16 md:flex-row md:items-end mt-28">
-            <h3 className="text-4xl font-medium text-white">
-              Top profissionais
-            </h3>
+            <p className="text-4xl font-medium text-white">Top profissionais</p>
             <span className="text-[#CCC6C6] cursor-pointer">ver mais</span>
           </div>
           <div className="grid gap-4 grid-cols-auto-repeat justify-items-center">
