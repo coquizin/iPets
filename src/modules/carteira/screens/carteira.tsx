@@ -210,7 +210,7 @@ export default function CarteiraScreen() {
           </div>
           <div className="flex justify-center w-full">
             <Link href={"/meus-pedidos"} passHref>
-              <a className="flex items-center justify-center mt-10 px-4 py-2 text-[1.1rem] font-medium duration-200 rounded-md border-2 border-[#d95d39] text-[#d95d39]">
+              <a className="flex items-center justify-center mt-10 px-4 py-2 text-[1.1rem] font-medium duration-200 rounded-md border-2 border-[#000000] text-[#000000] ">
                 Ver mais
               </a>
             </Link>

@@ -67,9 +67,9 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex items-center justify-center md:max-w-[200px] ">
-            <h3 className="font-Oswald font-medium text-[#F4EFEA]/[.9] text-xl md:text-2xl text-center">
+            <p className="font-Oswald font-medium text-[#F4EFEA]/[.9] text-xl md:text-2xl text-center">
               Dê uma vida mais divertida e saudável ao seu querido animal.
-            </h3>
+            </p>
           </div>
         </div>
       </div>
