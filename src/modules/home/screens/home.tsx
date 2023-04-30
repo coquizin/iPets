@@ -42,7 +42,7 @@ export default function HomeScreen() {
           </h1>
           <span className="md:text-lg">
             Não encontrou o que queria?{" "}
-            <a className="text-[#D95D39]" href="">
+            <a className="text-[#9e3a1e]" href="">
               clique aqui.
             </a>
           </span>
