@@ -5,7 +5,7 @@ export const CardModalContainer = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  max-height: 600px;
+  max-height: 700px;
   overflow-y: auto;
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
@@ -31,7 +31,6 @@ export const CardModalContainer = styled.div`
 
   @media (min-width: 768px) {
     padding: 14px;
-    max-height: none;
-    overflow-y: hidden;
+    height: 100%;
   }
 `;

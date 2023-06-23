@@ -7,20 +7,22 @@ import { useListProvider } from "@/services/providers";
 import { GuideDog } from "@styled-icons/foundation";
 import { formatToBRL } from "brazilian-values";
 import ServiceCard from "@/components/serviceCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ServiceModel } from "@/entities/ServiceModel";
 import { useCreateId } from "@/stores/useId";
+import NeedLogin from "@/components/notLogin";
 
 export default function HomeScreen() {
   const dataServices = useListService();
   const dataProvider = useListProvider();
   const [showModalService, setShowModalService] = useState(false);
   const [serviceData, setServiceData] = useState<ServiceModel>();
+  const [showNeedLogin, setShowNeedLogin] = useState(false);
   const consumerId = useCreateId((state) => state.data.id);
 
   const openServiceModal = (data: ServiceModel) => {
     if (!consumerId) {
-      alert("Você precisa estar logado para solicitar um serviço");
+      setShowNeedLogin(true);
       return;
     }
     setServiceData(data);
@@ -73,7 +75,7 @@ export default function HomeScreen() {
                           </div>
                         )}
                       </div>
-                      <div className="flex flex-col justify-between p-4 text-start">
+                      <div className="flex flex-col justify-between w-full p-4 text-start">
                         <div>
                           <p className="text-lg font-medium">{item.name}</p>
                           <p className="text-sm ">{item?.description}</p>
@@ -128,6 +130,9 @@ export default function HomeScreen() {
           ></div>
           <ServiceCard setShowModal={setShowModalService} data={serviceData} />
         </>
+      )}
+      {showNeedLogin && (
+        <NeedLogin show={showNeedLogin} onClick={setShowNeedLogin} />
       )}
     </>
   );
