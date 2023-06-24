@@ -36,6 +36,7 @@ export const StyledOverlay = styled.div`
 export const StyledContent = styled.div`
   z-index: 60;
   background-color: #fff;
+  color: #000;
   position: fixed;
   padding: 25px;
   top: 0;
