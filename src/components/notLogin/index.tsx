@@ -22,7 +22,7 @@ const NeedLogin = ({ show, onClick }) => {
         }}
         className="fixed z-[80] w-screen top-0 bottom-0 left-0 right-0 h-screen bg-black/60"
       />
-      <div className="fixed z-[80] max-w-[330px] w-full -translate-x-1/2 -translate-y-1/2 rounded-md p-4 bg-white top-1/2 left-1/2">
+      <div className="fixed z-[80] text-black max-w-[330px] w-full -translate-x-1/2 -translate-y-1/2 rounded-md p-4 bg-white top-1/2 left-1/2">
         <div className="flex justify-between w-full">
           <h1 className="text-2xl">Importante</h1>
           <button
