@@ -1,7 +1,6 @@
 import Image from "next/image";
 import BestWorkers from "../components/bestWorkers";
 import { Star } from "@styled-icons/boxicons-solid";
-import { StyledDiv } from "./styles";
 import { useListService } from "@/services/services";
 import { useListProvider } from "@/services/providers";
 import { GuideDog } from "@styled-icons/foundation";
@@ -10,17 +9,24 @@ import ServiceCard from "@/components/serviceCard";
 import { useState } from "react";
 import { ServiceModel } from "@/entities/ServiceModel";
 import { useCreateId } from "@/stores/useId";
+import NeedLogin from "@/components/notLogin";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Autoplay, Keyboard, Pagination, Navigation } from "swiper";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 export default function HomeScreen() {
   const dataServices = useListService();
   const dataProvider = useListProvider();
   const [showModalService, setShowModalService] = useState(false);
   const [serviceData, setServiceData] = useState<ServiceModel>();
+  const [showNeedLogin, setShowNeedLogin] = useState(false);
   const consumerId = useCreateId((state) => state.data.id);
 
   const openServiceModal = (data: ServiceModel) => {
     if (!consumerId) {
-      alert("Você precisa estar logado para solicitar um serviço");
+      setShowNeedLogin(true);
       return;
     }
     setServiceData(data);
@@ -29,12 +35,68 @@ export default function HomeScreen() {
 
   return (
     <>
-      <StyledDiv className="flex flex-col items-center justify-center px-6 py-10 pt-7">
-        <h1 className="md:text-4xl text-3xl md:text-[2.5rem] my-6 max-w-[650px] py-10 font-Oswald font-medium text-center text-[#0E1428] uppercase">
+      <div className="flex flex-col items-center w-full px-6 py-4 md:py-7">
+        <h1 className=" text-3xl md:text-[2.5rem] my-6 max-w-[650px] py-4 font-Oswald font-medium text-center text-[#0E1428] uppercase">
           Encontre os melhores profissionais para seus animais
         </h1>
-        <span className="md:text-lg">O que você precisa está aqui.</span>
-      </StyledDiv>
+        <div className="w-full max-w-content-wrapper-max">
+          <Swiper
+            pagination={{
+              clickable: true,
+            }}
+            navigation={true}
+            loop={true}
+            keyboard={{
+              enabled: true,
+            }}
+            modules={[Pagination, Navigation, Keyboard, Autoplay]}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            className="mySwiper"
+          >
+            <SwiperSlide>
+              <div className="h-[400px] w-full flex justify-center items-center ">
+                <Image
+                  src={"/assets/images/heroBackGround.jpg"}
+                  alt="dog walker"
+                  className=" rounded-l-md"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="h-[400px] w-full flex justify-center items-center ">
+                <Image
+                  src={"/assets/images/banho.jpg"}
+                  alt="dog walker"
+                  className=" rounded-l-md"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="h-[400px] w-full flex justify-center items-center ">
+                <Image
+                  src={"/assets/images/loginPic.jpg"}
+                  alt="dog walker"
+                  className=" rounded-l-md"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="h-[400px] w-full flex justify-center items-center ">
+                ANÚNCIOS AQUI
+              </div>
+            </SwiperSlide>
+          </Swiper>
+        </div>
+      </div>
       <div className="flex flex-col items-center py-10 ">
         <div className="flex flex-col items-center gap-2 mb-10">
           <h1 className="md:text-4xl text-2xl  max-w-[800px] font-medium text-center mt-6 text-[#0E1428] ">
@@ -69,11 +131,11 @@ export default function HomeScreen() {
                           />
                         ) : (
                           <div className="flex items-center justify-center w-full h-full">
-                            <div className="min-w-full min-h-full bg-gray-400 opacity-50" />
+                            <div className="min-w-full min-h-full bg-gray-400 opacity-50 rounded-l-md" />
                           </div>
                         )}
                       </div>
-                      <div className="flex flex-col justify-between p-4 text-start">
+                      <div className="flex flex-col justify-between w-full p-4 text-start">
                         <div>
                           <p className="text-lg font-medium">{item.name}</p>
                           <p className="text-sm ">{item?.description}</p>
@@ -128,6 +190,9 @@ export default function HomeScreen() {
           ></div>
           <ServiceCard setShowModal={setShowModalService} data={serviceData} />
         </>
+      )}
+      {showNeedLogin && (
+        <NeedLogin show={showNeedLogin} onClick={setShowNeedLogin} />
       )}
     </>
   );

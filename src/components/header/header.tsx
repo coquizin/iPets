@@ -140,30 +140,7 @@ export default function Header() {
           isOpen={showMenu}
           onClose={() => setShowMenu(false)}
           overlay={true}
-        >
-          <ul className="flex flex-col gap-4 mt-4">
-            <li>
-              <Link href={"/"} passHref>
-                <a className="text-[1.1rem] duration-200 ">Home</a>
-              </Link>
-            </li>
-            <li>
-              <Link href={"/"} passHref>
-                <a className="text-[1.1rem] duration-200 ">Explore</a>
-              </Link>
-            </li>
-            <li>
-              <Link href={"/prestador/login"} passHref>
-                <a className="text-[1.1rem] duration-200 ">Cuidadores</a>
-              </Link>
-            </li>
-            <li>
-              <Link href={"/"} passHref>
-                <a className="text-[1.1rem] duration-200 ">Parceiros</a>
-              </Link>
-            </li>
-          </ul>
-        </SideSheet>
+        />
       )}
     </>
   );

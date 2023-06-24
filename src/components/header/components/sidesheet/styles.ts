@@ -21,7 +21,7 @@ const contentDisappear = keyframes`
 `;
 
 export const StyledOverlay = styled.div`
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
   inset: 0;
   z-index: 60;
