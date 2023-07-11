@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Verified } from "@styled-icons/material";
 import BestWorkers from "../components/bestWorkers";
 import { Star } from "@styled-icons/boxicons-solid";
 import { useListService } from "@/services/services";
@@ -109,55 +110,90 @@ export default function HomeScreen() {
         <div className="flex justify-center w-full px-6">
           <div className="w-full max-w-content-wrapper-max">
             <div className="grid gap-5 mb-10 xl:grid-cols-auto-1818px md:grid-cols-auto-768px grid-cols-auto-repeat justify-items-center">
-              {dataServices?.data?.map((item, idx) => {
-                if (idx < 12) {
-                  return (
-                    <div
-                      key={item._id}
-                      onClick={() => {
-                        openServiceModal(item);
-                      }}
-                      className="flex w-full duration-300 bg-white rounded-md ease-linear min-h-[130px] max-h-[140px] cursor-pointer hover:scale-[1.02] hover:shadow-[0_2px_8px_rgba(0,0,0,.4)]"
-                    >
-                      <div className="flex rounded-l-md min-w-[130px] justify-center">
-                        {item?.thumbnail ? (
-                          <Image
-                            src={`data:image/jpg;base64, ${item?.thumbnail}`}
-                            alt="dog walker"
-                            className="min-h-[130px] rounded-l-md"
-                            width={140}
-                            height={140}
-                            objectFit="cover"
-                          />
-                        ) : (
-                          <div className="flex items-center justify-center w-full h-full">
-                            <div className="min-w-full min-h-full bg-gray-400 opacity-50 rounded-l-md" />
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex flex-col justify-between w-full p-4 text-start">
-                        <div>
-                          <p className="text-lg font-medium">{item.name}</p>
-                          <p className="text-sm ">{item?.description}</p>
+              {dataServices?.isFetched &&
+                dataServices?.data?.map((item, idx) => {
+                  if (idx < 12) {
+                    return (
+                      <div
+                        key={item._id}
+                        onClick={() => {
+                          openServiceModal(item);
+                        }}
+                        className="flex w-full duration-300 bg-white rounded-md ease-linear min-h-[130px] max-h-[140px] cursor-pointer hover:scale-[1.02] hover:shadow-[0_2px_8px_rgba(0,0,0,.4)]"
+                      >
+                        <div className="flex rounded-l-md min-w-[130px] justify-center">
+                          {item?.thumbnail ? (
+                            <Image
+                              src={`data:image/jpg;base64, ${item?.thumbnail}`}
+                              alt="dog walker"
+                              className="min-h-[130px] rounded-l-md"
+                              width={140}
+                              height={140}
+                              objectFit="cover"
+                            />
+                          ) : (
+                            <div className="flex items-center justify-center w-full h-full">
+                              <div className="min-w-full min-h-full bg-gray-400 opacity-50 rounded-l-md" />
+                            </div>
+                          )}
                         </div>
-                        <div className="flex items-center justify-between">
+                        <div className="flex flex-col justify-between w-full p-4 text-start">
                           <div>
-                            <span className="text-secundary">
-                              {formatToBRL(item?.price)}
-                            </span>
+                            <p className="text-lg font-medium">{item.name}</p>
+                            <p className="text-sm ">{item?.description}</p>
                           </div>
-                          <div className="flex items-end gap-1 text-amber-500">
-                            <Star className="w-4 h-4 text-amber-500" />
-                            <span className="font-sans text-xs font-medium">
-                              ...
-                            </span>
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <span className="text-secundary">
+                                {formatToBRL(item?.price)}
+                              </span>
+                            </div>
+                            <div className="flex items-end gap-1 text-amber-500">
+                              <Star className="w-4 h-4 text-amber-500" />
+                              <span className="font-sans text-xs font-medium">
+                                ...
+                              </span>
+                            </div>
                           </div>
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
+              {dataServices?.isLoading &&
+                Array.from({ length: 12 }).map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="flex w-full duration-300 bg-white animate-pulse rounded-md ease-linear min-h-[130px] max-h-[140px] cursor-pointer hover:scale-[1.02] hover:shadow-[0_2px_8px_rgba(0,0,0,.4)]"
+                  >
+                    <div className="flex rounded-l-md min-w-[130px] justify-center">
+                      <div className="flex items-center justify-center w-full h-full">
+                        <div className="min-w-full min-h-full bg-gray-400 rounded-l-md" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col justify-between w-full p-4 text-start">
+                      <div>
+                        <p className="w-full h-4 mb-2 text-lg font-medium bg-gray-400 rounded-md " />
+                        <div className="flex flex-col gap-1">
+                          <p className="w-full h-3 text-sm bg-gray-400 rounded-md " />
+                          <p className="w-full h-3 text-sm bg-gray-400 rounded-md " />
+                          <p className="w-full h-3 text-sm bg-gray-400 rounded-md " />
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between ">
+                        <div>
+                          <p className="w-[65px] h-4 bg-gray-400   rounded-md" />
+                        </div>
+                        <div className="flex items-end gap-1 text-amber-500">
+                          <Star className="w-4 h-4 text-amber-500 " />
+                          <span className="font-sans text-xs font-medium">
+                            ...
+                          </span>
                         </div>
                       </div>
                     </div>
-                  );
-                }
-              })}
+                  </div>
+                ))}
             </div>
           </div>
         </div>
@@ -170,11 +206,31 @@ export default function HomeScreen() {
             <span className="text-[#CCC6C6] cursor-pointer">ver mais</span>
           </div>
           <div className="grid gap-4 grid-cols-auto-repeat justify-items-center">
-            {dataProvider?.data?.map((item, idx) => {
-              if (idx < 8) {
-                return <BestWorkers key={item._id} {...item} />;
-              }
-            })}
+            {dataProvider?.isFetched &&
+              dataProvider?.data?.map((item, idx) => {
+                if (idx < 8) {
+                  return <BestWorkers key={item._id} {...item} />;
+                }
+              })}
+            {dataProvider?.isLoading &&
+              Array.from({ length: 8 }).map((_, idx) => (
+                <div
+                  key={idx}
+                  className="flex gap-5 animate-pulse border items-center cursor-pointer hover:border-[#7a7977] border-transparent max-w-fit  p-2 rounded-md px-4 hover:shadow-md"
+                >
+                  <div>
+                    <div className="rounded-full h-[90px] w-[90px] bg-gray-400" />
+                  </div>
+                  <div className="flex flex-col gap-1 text-start">
+                    <p className="w-[90px] h-4 bg-gray-400 rounded-md" />
+                    <p className="bg-[#7B9E89] h-3 rounded-md" />
+                    <p className="w-full h-3 bg-gray-400 rounded-md" />
+                  </div>
+                  <div className="flex items-center ">
+                    <Verified className="w-8 h-8 text-green-600" />
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
         <div className="flex justify-center w-full mt-20 max-w-content-wrapper-max">

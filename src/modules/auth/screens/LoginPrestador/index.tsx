@@ -128,7 +128,7 @@ export default function LoginPrestadorScreen() {
 
             <div className="flex flex-col items-center justify-center w-full gap-5">
               <button
-                className="md:max-w-[400px] max-w-[300px] w-full flex items-center justify-center h-[62px] rounded-md bg-[#E9B13F] hover:bg-[#d6a137] duration-150 mt-4 text-white text-lg font-semibold uppercase"
+                className="md:max-w-[400px] max-w-[300px] w-full flex items-center justify-center h-[62px] text-black duration-200 rounded-md bg-yellow-500 shadow-lg hover:shadow-none border-gray-800 mt-4  text-lg font-semibold uppercase"
                 type="submit"
               >
                 Entrar
