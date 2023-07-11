@@ -84,7 +84,7 @@ export default function HeaderPrestador() {
                   </a>
                 </Link>
                 <Link href={"/prestador/login"} passHref>
-                  <a className="flex items-center justify-center w-[100px] h-[35px] text-[1.1rem] text-black duration-200 rounded-md bg-yellow-500 hover:bg-yellow-500/75 border border-secundary">
+                  <a className="flex items-center justify-center w-[100px] h-[35px] text-[1.1rem] text-black duration-200 rounded-md bg-yellow-500 shadow-lg hover:shadow-none border-gray-800">
                     entrar
                   </a>
                 </Link>
