@@ -38,22 +38,24 @@ export default function Header() {
               </MenuToggle>
             </div>
 
-            <Link href={"/"} passHref>
-              <a>
-                <div className="flex justify-center gap-2 cursor-pointer md:ml-0 justify-self-center md:justify-self-start md:max-w-fit">
-                  <Image
-                    alt="logo iPets"
-                    src="/assets/images/LogoPets.svg"
-                    width={45}
-                    className="min-w-max"
-                    height={45}
-                  />
-                  {/* <div className="flex justify-center text-3xl font-medium text-yellow-500">
+            <div className="flex justify-center justify-self-center md:justify-self-start">
+              <Link href={"/"} passHref>
+                <a>
+                  <div className="cursor-pointer md:ml-0 max-w-fit">
+                    <Image
+                      alt="logo iPets"
+                      src="/assets/images/LogoPets.svg"
+                      width={45}
+                      className="min-w-max"
+                      height={45}
+                    />
+                    {/* <div className="flex justify-center text-3xl font-medium text-yellow-500">
                     iPets
                   </div> */}
-                </div>
-              </a>
-            </Link>
+                  </div>
+                </a>
+              </Link>
+            </div>
 
             <nav className="justify-center hidden text-secundary md:flex">
               <ul className="flex space-x-4">
@@ -63,18 +65,15 @@ export default function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link href={"/"} passHref>
+                  <Link href={"/explore"} passHref>
                     <a className="text-[1.1rem] duration-200 ">Explore</a>
                   </Link>
                 </li>
                 <li>
                   <Link href={"/prestador/login"} passHref>
-                    <a className="text-[1.1rem] duration-200 ">Cuidadores</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/"} passHref>
-                    <a className="text-[1.1rem] duration-200 ">Parceiros</a>
+                    <a target="_blanck" className="text-[1.1rem] duration-200 ">
+                      Cuidadores
+                    </a>
                   </Link>
                 </li>
               </ul>
