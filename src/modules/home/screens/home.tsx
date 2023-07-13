@@ -16,6 +16,7 @@ import "swiper/css";
 import { Autoplay, Keyboard, Pagination, Navigation } from "swiper";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import Link from "next/link";
 
 export default function HomeScreen() {
   const dataServices = useListService();
@@ -104,7 +105,10 @@ export default function HomeScreen() {
             Escolha a opção que deseja
           </h1>
           <span className="md:text-lg">
-            Não encontrou o que queria? <a href="">clique aqui.</a>
+            Não encontrou o que queria?{" "}
+            <Link href={"/explore"} passHref>
+              <a>clique aqui.</a>
+            </Link>
           </span>
         </div>
         <div className="flex justify-center w-full px-6">
@@ -140,7 +144,9 @@ export default function HomeScreen() {
                         <div className="flex flex-col justify-between w-full p-4 text-start">
                           <div>
                             <p className="text-lg font-medium">{item.name}</p>
-                            <p className="text-sm ">{item?.description}</p>
+                            <p className="text-sm text-ellipsis ">
+                              {item?.description}
+                            </p>
                           </div>
                           <div className="flex items-center justify-between">
                             <div>
@@ -203,7 +209,9 @@ export default function HomeScreen() {
         <div className="w-full max-w-content-wrapper-max">
           <div className="flex flex-col items-center gap-3 mb-10 md:mb-16 md:flex-row md:items-end mt-28">
             <p className="text-4xl font-medium text-white">Top profissionais</p>
-            <span className="text-[#CCC6C6] cursor-pointer">ver mais</span>
+            <Link href={"/explore"} passHref>
+              <a className="text-[#CCC6C6] cursor-pointer">ver mais</a>
+            </Link>
           </div>
           <div className="grid gap-4 grid-cols-auto-repeat justify-items-center">
             {dataProvider?.isFetched &&

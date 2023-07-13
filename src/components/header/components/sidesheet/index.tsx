@@ -57,18 +57,15 @@ const SideSheet = ({
             </Link>
           </li>
           <li onClick={close}>
-            <Link href={"/"} passHref>
+            <Link href={"/explore"} passHref>
               <a className="text-[1.1rem] duration-200 ">Explore</a>
             </Link>
           </li>
           <li onClick={close}>
             <Link href={"/prestador/login"} passHref>
-              <a className="text-[1.1rem] duration-200 ">Cuidadores</a>
-            </Link>
-          </li>
-          <li onClick={close}>
-            <Link href={"/"} passHref>
-              <a className="text-[1.1rem] duration-200 ">Parceiros</a>
+              <a target="_blanck" className="text-[1.1rem] duration-200 ">
+                Cuidadores
+              </a>
             </Link>
           </li>
         </ul>
