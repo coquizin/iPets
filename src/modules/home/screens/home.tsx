@@ -166,7 +166,7 @@ export default function HomeScreen() {
                     );
                   }
                 })}
-              {dataServices?.isLoading &&
+              {(dataServices?.isLoading || !!dataProvider?.error) &&
                 Array.from({ length: 12 }).map((_, idx) => (
                   <div
                     key={idx}
@@ -220,7 +220,7 @@ export default function HomeScreen() {
                   return <BestWorkers key={item._id} {...item} />;
                 }
               })}
-            {dataProvider?.isLoading &&
+            {(dataProvider?.isLoading || !!dataProvider?.error) &&
               Array.from({ length: 8 }).map((_, idx) => (
                 <div
                   key={idx}
